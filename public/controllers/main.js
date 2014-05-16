@@ -12,11 +12,11 @@ angularRoutingApp.config(function($routeProvider) {
             controller 	: 'mainController'
         })
         .when('/about', {
-            templateUrl : 'partials/acerca.html',
+            templateUrl : 'partials/about.html',
             controller 	: 'aboutController'
         })
         .when('/contact', {
-            templateUrl : 'partials/contacto.html',
+            templateUrl : 'partials/contact.html',
             controller 	: 'contactController'
         })
         .otherwise({
