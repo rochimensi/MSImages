@@ -1,0 +1,48 @@
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 0;
+}
+.navbar-search{
+   position: relative;
+   float: left;
+   width: 50%;
+   margin-top: 0.7%;
+}
+.navbar-form.navbar-right:last-child {
+    margin-right: -360px;
+}
+
+.navbar-fixed-my, .navbar-fixed-bottom {
+    /*position: fixed;*/
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    margin-bottom: 0px;
+}
+
+
+.nav-menu{
+    padding:60px 60px 30px 60px;
+    margin-bottom:30px;
+    padding-left:35px;
+    height: 10px;
+    color:inherit;
+    background-color: #999C95;
+}
+.nav.ul{
+    vertical-align: top;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+}
+.navbar-inverse {
+    background-color: #33B84E;
+    border-color: #080808;
+}
+.navbar-inverse .navbar-brand {
+    color: #E2E2F1;
+    font: bold;
+    font-family: 'Open Sans', sans-serif;
+}
