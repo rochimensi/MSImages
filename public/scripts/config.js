@@ -8,15 +8,15 @@ angularRoutingApp.config(function($routeProvider) {
 
     $routeProvider
         .when('/', {
-            templateUrl	: 'partials/home.html',
+            templateUrl	: '../partials/home.html',
             controller 	: 'mainController'
         })
         .when('/about', {
-            templateUrl : 'partials/about.html',
+            templateUrl : '../partials/about.html',
             controller 	: 'aboutController'
         })
         .when('/contact', {
-            templateUrl : 'partials/contact.html',
+            templateUrl : '../partials/contact.html',
             controller 	: 'contactController'
         })
         .otherwise({
