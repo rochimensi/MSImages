@@ -1,4 +1,5 @@
 
 /.idea
+/public/uploads
 npm-debug.log
 node_modules
