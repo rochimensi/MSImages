@@ -1,37 +1,26 @@
 //Controllers
 
 // Creación del módulo que engloba todos los controllers
-var angularRoutingApp = angular.module('angularRoutingApp', ['ngRoute']);
+var app = angular.module('app', ['ngRoute']);
 
 // Configuración de las rutas
-angularRoutingApp.config(function($routeProvider) {
+app.config(function($routeProvider) {
 
     $routeProvider
         .when('/', {
             templateUrl	: '../partials/home.html',
-            controller 	: 'mainController'
+            controller 	: 'mainCtrl'
         })
         .when('/about', {
             templateUrl : '../partials/about.html',
-            controller 	: 'aboutController'
+            controller 	: 'aboutCtrl'
         })
         .when('/contact', {
             templateUrl : '../partials/contact.html',
-            controller 	: 'contactController'
+            controller 	: 'contactCtrl'
         })
         .otherwise({
             redirectTo: '/'
         });
 });
 
-angularRoutingApp.controller('mainController', function($scope) {
-    $scope.message = 'Hola, Mundo!';
-});
-
-angularRoutingApp.controller('aboutController', function($scope) {
-    $scope.message = 'Esta es la página "Acerca de"';
-});
-
-angularRoutingApp.controller('contactController', function($scope) {
-    $scope.message = 'Esta es la página de "Contacto", aquí podemos poner un formulario';
-});

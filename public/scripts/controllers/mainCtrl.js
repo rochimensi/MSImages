@@ -1,3 +1,5 @@
-/**
- * Created by Desarrollo49 on 5/16/2014.
- */
+angular
+    .module('app')
+    .controller('mainCtrl', function($scope) {
+    $scope.message = 'Hola, Mundo!';
+});
