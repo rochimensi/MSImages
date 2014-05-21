@@ -1,14 +1,27 @@
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
+<div class="main-body">
+    <form name='upload' method='post' enctype="multipart/form-data" action="http://localhost:4040">
+        <p float= "left">Name: </p> <input float= "left" name="file-name" placeholder="Name">
+        <div class="form-group theme-middleContainer">
+        <label>Preview</label>
 
-        <div class="col-md-4">
-            <h2>IMAGE detail</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        <div class="input-group theme-logotypeContainer">
+            <div class="image-container">
+            <img class="default-image" ng-src="../styles/images/default_picture.jpg" ng-hide="imageSrc!==undefined"/>
+            <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="imageSrc==undefined"/>
+             </div>
+             <div class="theme-browse-image-container">
+             <input id="uploadFile" name="uploadFile" class="logo-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
+                 <div class="fileUpload btn btn-mob theme-upload">
+                     <span>Upload</span>
+                    <input type="file" name="uploadedfile">
+                 </div>
+             </div>
         </div>
-
-    </div>
-
-    <hr>
-</div> <!-- /container -->
+         <div class="error" ng-show="invalidImageExtension">{{formValidationMessage.formatImagesUpload}}</div>
+        </div>
+    <div class="footer-role">
+        <button type="submit" class="btn-mob action-form footer-button">Save</button>
+        <button type="button" ng-click="cancel()" class="btn-mob white action-form footer-button">Cancel</button>
+    </div> <!-- /container -->
+    </form>
+</div>
