@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="image-uploadCtrl">
     <div class="row">
         <div class="title-image">
             <h3 class="ng-binding">Add Image</h3>
@@ -24,7 +24,7 @@
                             <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
                             <div class="fileUpload btn btn-mob btn-primary">
                                 <span>Upload</span>
-                                <input type="file" id="imageType" name="imageType" accept="image/png, image/jpeg" ng-model="image.Type" mcp-file-select="onFileSelect($files)" class="upload ng-pristine ng-valid">
+                                <input type="file" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" ng-model="image.Type" class="upload ng-pristine ng-valid">
                             </div>
                         </div>
                     </div>

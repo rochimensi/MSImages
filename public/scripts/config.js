@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
         })
         .when('/image-upload', {
             templateUrl	: '../partials/image-upload.html',
-            controller 	: 'mainCtrl'
+            controller 	: 'image-uploadCtrl'
         })
         .when('/about', {
             templateUrl : '../partials/about.html',
