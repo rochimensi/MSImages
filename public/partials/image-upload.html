@@ -1,14 +1,45 @@
 <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
-
-        <div class="col-md-4">
-            <h2>IMAGE detail</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        <div class="title-image">
+            <h3 class="ng-binding">Add Image</h3>
         </div>
-
+        <div class="main-body">
+            <form name='upload' method='post' enctype="multipart/form-data" action="http://localhost:4040">
+                <div class="image-middleContainer">
+                    <label>Name: </label>
+                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Name" maxlength="50">
+                </div>
+                <div class="image-middleContainer">
+                    <label>Description: </label>
+                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Description" maxlength="100">
+                </div>
+                <div class="image-middleContainer">
+                    <label>Preview</label>
+                    <div class="image-logotypeContainer">
+                        <div class="image-container">
+                            <img class="default-image" ng-src="../styles/images/default_picture.jpg" ng-hide="imageSrc"/>
+                            <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="!imageSrc"/>
+                        </div>
+                        <div class="image-browse-image-container">
+                            <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
+                            <div class="fileUpload btn btn-mob btn-primary">
+                                <span>Upload</span>
+                                <input type="file" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" ng-model="image.Type" class="upload ng-pristine ng-valid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error" ng-show="invalidImageExtension">{{formValidationMessage.formatImagesUpload}}</div>
+                </div>
+                <div class="image-middleContainer">
+                    <label>Tags: </label>
+                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Tags" maxlength="100">
+                </div>
+                <div class="footer-image">
+                    <button type="submit" class="btn-mob action-form footer-button">Save</button>
+                    <button type="button" ng-click="cancel()" class="btn-mob white action-form footer-button">Cancel</button>
+                </div> <!-- /container -->
+            </form>
+        </div>
     </div>
+</div>
 
-    <hr>
-</div> <!-- /container -->
