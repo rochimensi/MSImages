@@ -111,7 +111,7 @@
 }
 .navbar-inverse {
     background-color: #33B84E;
-    border-color: #080808;
+    border-color: #33B84E;
 }
 .navbar-inverse .navbar-brand {
     color: #E2E2F1;
@@ -121,5 +121,13 @@
 .main-body{
     margin-left: 10%;
     width: 80%;
+}
+.footer {
+    padding: 10px 15px;
+    background-color: #33B84E;
+    padding-top: 20px;
+    border-top: 1px solid;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 
 }

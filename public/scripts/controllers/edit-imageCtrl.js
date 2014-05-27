@@ -1,9 +1,14 @@
-app.controller('image-uploadCtrl', function ($scope,$rootScope, $location){
+app.controller('edit-imageCtrl', function ($scope, $rootScope, $location){
+
         $scope.cancel = function () {
            $location.path("/");
         };
+        $scope.save = function () {
+            $location.path("/");
+        };
         $scope.init = function () {
-            $scope.titleView = "ADD Image";
+            $scope.titleView = "EDIT Image";
+
         };
         //Initialization
         $scope.init();

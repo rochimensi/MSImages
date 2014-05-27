@@ -23,6 +23,14 @@ app.config(function($routeProvider) {
             templateUrl : '../partials/contact.html',
             controller 	: 'contactCtrl'
         })
+        .when('/search_results:keyword', {
+            templateUrl : '../partials/search_results.html',
+            controller 	: 'searchCtrl'
+        })
+        .when('/edit-image/:imageId', {
+            templateUrl : '../partials/image-upload.html',
+            controller 	: 'edit-imageCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
