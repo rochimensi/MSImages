@@ -4,14 +4,14 @@
             <h3 class="ng-binding">{{titleView}}</h3>
         </div>
         <div class="main-body">
-            <form name='upload' method='post' enctype="multipart/form-data" action="http://localhost:4040">
+            <form>
                 <div class="image-middleContainer">
                     <label>Name: </label>
-                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Name" maxlength="50">
+                    <input type="text" class="form-control" float= "left" name="file-name" ng-model="name" placeholder="Name" maxlength="50">
                 </div>
                 <div class="image-middleContainer">
                     <label>Description: </label>
-                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Description" maxlength="100">
+                    <input type="text" class="form-control" float= "left" name="file-name" ng-model="description" placeholder="Description" maxlength="100">
                 </div>
                 <div class="image-middleContainer">
                     <label>Preview</label>
@@ -24,7 +24,7 @@
                             <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
                             <div class="fileUpload btn btn-mob btn-primary">
                                 <span>Upload</span>
-                                <input type="file" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" ng-model="image.Type" class="upload ng-pristine ng-valid">
+                                <input type="file" file-input="files" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" multiple class="upload ng-pristine ng-valid">
                             </div>
                         </div>
                     </div>
@@ -32,12 +32,13 @@
                 </div>
                 <div class="image-middleContainer">
                     <label>Tags: </label>
-                    <input type="text" class="form-control" float= "left" name="file-name" placeholder="Tags" maxlength="100">
+                    <input type="text" class="form-control" float= "left" name="file-name" ng-model="tags" placeholder="Tags" maxlength="100">
                 </div>
                 <div class="footer-image">
-                    <button type="submit" class="btn-mob action-form footer-button">Save</button>
+                    <button ng-click="addImage()" type="submit" class="btn-mob action-form footer-button">Save</button>
                     <button type="button" ng-click="cancel()" class="btn-mob white action-form footer-button">Cancel</button>
                 </div> <!-- /container -->
+
             </form>
         </div>
     </div>

@@ -1,3 +1,13 @@
-/**
- * Created by Desarrollo49 on 6/2/2014.
- */
+app.directive('fileInput', ['$parse', function ($parse) {
+   return {
+       restrict:'A',
+       link: function ($scope, elm, attrs){
+           elm.bind('change', function(){
+               $parse(attrs.fileInput)
+               .assign($scope, elm[0].files)
+               $scope.$apply()
+           })
+       }
+   }
+}]);
+//sincroniza los files con mi scope

@@ -1,16 +1,9 @@
-angular
-    .module('app')
-    .controller('mainCtrl', function($scope, $location) {
+app.controller('imageCtrl', ['$scope', '$location','imageService',
+    function($scope, $location, imageService) {
 
-        $scope.message = 'Main ctrl!';
-
-        $scope.init = function(){
-
-        };
-
-        //Go to search
-        $scope.search = function (keyword) {
-            $location.path("/search_results"+keyword);
+        $scope.init = function () {
+            $scope.titleView = "Uploaded Images";
+            $scope.files = imageService.getAll(); // get last image
         };
 
         $scope.goToImage = function() {
@@ -23,4 +16,4 @@ angular
         //Init data
         $scope.init();
     }
-);
+]);

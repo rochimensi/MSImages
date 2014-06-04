@@ -23,6 +23,10 @@ app.config(function($routeProvider) {
             templateUrl : '../partials/contact.html',
             controller 	: 'contactCtrl'
         })
+        .when('/images', {
+            templateUrl : '../partials/upload.html',
+            controller 	: 'imageCtrl'
+        })
         .when('/search_results:keyword', {
             templateUrl : '../partials/search_results.html',
             controller 	: 'searchCtrl'

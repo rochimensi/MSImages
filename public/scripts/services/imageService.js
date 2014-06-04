@@ -1,39 +1,42 @@
 app.service('imageService', ['$http','$q', function ($http, $q) {
+    var cont = 3;
+    var images =  [
+        {
+            name:'Flowers 1',
+            description:'Description of image 1',
+            id:'1',
+            tags:'red'
+        },
+        {
+            name:'Flowers 2',
+            description:'Description of image 2',
+            id:'2',
+            tags:'blue'
+        },
+        {
+            name:'Flowers 3',
+            description:'Description of image 3',
+            id:'3',
+            tags:'green'
+        }];
 
-    this.getImages = function () {
-        return $http.get('/v1/tokens/')
+    //return the array
+    this.getAll = function () {
+        return images;
     };
 
     //generate search by id in the current array
-    this.getById = function (imageId) {
-       // console.log(imageId)
-        //List of images data from server
-        var deferred = $q.defer();
-        var promise = deferred.promise;
+    this.getById = function (ImageId) {
+        return _.find(images, function(itemImage){
+            return itemImage.id == ImageId});
+    };
+    //add a new element to array
+    this.create = function (Item) {
+        Item.id = ++cont;
+        images.push(Item);
+        //post file name, upload file (input) method = ?
+        $http.post("/",Item) //lo manda al server
 
-        var images =  {
-            name:'Flowers',
-             description:'Description of image 1',
-             id:'1',
-             tags:'red'
-        };
-        $http.get('api/user', {params: {id: '5'}
-        }).success(function(data, status, headers, config) {
-            deferred.resolve(['hola','mundo']);
-        }).error(function(data, status, headers, config) {
-        // Handle the error
-            console.log("no anda");
-        });
-        console.log(deferred);
-       // debugger;
-
-
-        return promise;
-     //   return _.find(array, function(itemImage){return itemImage.id == imageId});
     };
 
-
-    this.getImagebyName = function (name) {
-        return $http.get('/v1/users/' + name);
-    };
 }]);
