@@ -4,7 +4,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.cancel = function () {
                 $location.path("/");
             };
-            
+
             $scope.save = function () {
                 $scope.imageService.update($scope.current.id, {id: $scope.current.id, name: $scope.name, text: $scope.type});
                 $location.path("\images");

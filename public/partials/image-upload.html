@@ -24,7 +24,7 @@
                             <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
                             <div class="fileUpload btn btn-mob btn-primary">
                                 <span>Upload</span>
-                                <input type="file" file-input="files" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" multiple class="upload ng-pristine ng-valid">
+                                <input type="file" file-input="files" id="imageType" name="uploadedfile" accept="image/png, image/jpeg" multiple ng-file-select="onFileSelect($files)"  class="upload ng-pristine ng-valid">
                             </div>
                         </div>
                     </div>
