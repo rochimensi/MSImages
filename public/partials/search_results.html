@@ -1,9 +1,15 @@
 <div class="container">
+    <div class="row">
+        <label class="col-md-1">Name </label>
+        <label class="col-md-1">Description</label>
+        <label class="col-md-1">Tags</label>
+        <label class="col-md-1"> </label>
+    </div>
     <!-- Example row of columns -->
     <div class="row" ng-repeat="image in images">
         <div class="col-md-1">{{image.name}}</div>
-        <div class="col-md-1">{{image.id}}</div>
-        <div class="col-md-1">{{image.tag}}</div>
+        <div class="col-md-1">{{image.description}}</div>
+        <div class="col-md-1">{{image.tags}}</div>
         <div> <a href="#/edit-image/{{image.id}}">Edit</a></div>
     </div>
 

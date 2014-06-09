@@ -5,6 +5,7 @@ app.controller('image-uploadCtrl',['$scope', '$http','$location','imageService',
             imageService.create({name:$scope.name, description:$scope.description, tags:$scope.tags, obj:$scope.files});
             $location.path("\images");
         };
+       
         $scope.cancel = function () {
            $location.path("/");
         };

@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
             templateUrl : '../partials/upload.html',
             controller 	: 'imageCtrl'
         })
-        .when('/search_results:keyword', {
+        .when('/search_results/:keyword', {
             templateUrl : '../partials/search_results.html',
             controller 	: 'searchCtrl'
         })

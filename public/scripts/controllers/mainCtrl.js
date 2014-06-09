@@ -10,7 +10,7 @@ angular
 
         //Go to search
         $scope.search = function (keyword) {
-            $location.path("/search_results"+keyword);
+            $location.path("/search_results/"+keyword);
         };
 
         $scope.goToImage = function() {
