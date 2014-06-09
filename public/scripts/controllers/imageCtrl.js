@@ -2,7 +2,7 @@ app.controller('imageCtrl', ['$scope', '$location','imageService',
     function($scope, $location, imageService) {
 
         $scope.init = function () {
-            $scope.titleView = "Uploaded Images";
+            $scope.titleView = "Recently Uploaded Images";
             $scope.files = imageService.getAll(); // get last image
         };
 
