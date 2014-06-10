@@ -33,12 +33,35 @@
 
 </head>
 <body ng-controller='mainCtrl'>
+<!-- Navigation bar -->
 <header ng-include="'partials/nav.html'"></header>
-<div id="main">
-    <!-- Aquí inyectamos las vistas -->
-    <div ng-view></div>
+<!-- Navigation bar -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Current Search</a></li>
+                <li><a href="#">Keyword(s)</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul>
+        </div>
+        <div>
+
+            <div ng-view float="left" >
+            </div>
+
+        </div>
+    </div>
 </div>
 <!--<footer ng-include="'partials/footer.html'"></footer>
 </div>  /container -->
 
-</body></html>
+</body>
+</html>
