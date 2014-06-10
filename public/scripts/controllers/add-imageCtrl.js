@@ -1,6 +1,8 @@
 app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fileReader',
             function ($scope, $http, $location, imageService,fileReader) {
 
+
+
         $scope.save = function() {
             var formIsvalid = $scope.name !== undefined && $scope.description !== undefined && $scope.tags !== undefined;
             if(formIsvalid) {
@@ -24,6 +26,8 @@ app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fi
         };
         $scope.init = function () {
             $scope.titleView = "ADD Image";
+            $scope.sidebar = 'false';
+
         };
         //Initialization
         $scope.init();

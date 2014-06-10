@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
             controller 	: 'contactCtrl'
         })
         .when('/images', {
-            templateUrl : '../partials/upload.html',
+            templateUrl : '../partials/search_results.html',
             controller 	: 'imageCtrl'
         })
         .when('/search_results/:keyword', {

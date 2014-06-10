@@ -12,6 +12,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
 
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
+                $scope.sidebar = 'false';
                 $scope.current = imageService.getById($routeParams.imageId);
                 $scope.name = $scope.current.name;
                 $scope.description = $scope.current.description;
@@ -23,5 +24,3 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.init();
         }
 ]);
-//services como parametro
-// service http.get ()

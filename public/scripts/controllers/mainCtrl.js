@@ -3,6 +3,7 @@ angular
     .controller('mainCtrl', function($scope, $location) {
 
         $scope.message = 'Main ctrl!';
+        $scope.sidebar = 'false';
 
         $scope.init = function(){
 
@@ -11,6 +12,7 @@ angular
         //Go to search
         $scope.search = function (keyword) {
             $location.path("/search_results/"+keyword);
+            $scope.sidebar = 'true';
         };
 
         $scope.goToImage = function() {
