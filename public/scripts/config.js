@@ -1,7 +1,7 @@
 //Controllers
 
 // Creación del módulo que engloba todos los controllers
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngTagsInput']);
 
 // Configuración de las rutas
 app.config(function($routeProvider) {

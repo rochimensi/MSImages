@@ -27,6 +27,11 @@ app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fi
         $scope.init = function () {
             $scope.titleView = "ADD Image";
             $scope.sidebar = 'false';
+            $scope.tags = [
+                { text: 'Tag1' },
+                { text: 'Tag2' },
+                { text: 'Tag3' }
+            ];
 
         };
         //Initialization
