@@ -1,5 +1,7 @@
-<div ng-include="'partials/sidebar.html'" ng-show='sidebar'></div>
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" ng-include="'partials/sidebar.html'" ng-show='sidebar'></div>
+      <div class="col-md-10">
     <div class="title-image main-body">
         <h3 class="ng-binding">{{titleView}}</h3>
     </div>
@@ -22,6 +24,7 @@
         </tr>
         </tbody>
     </table>
-
+   </div>
+  </div>
 
 </div> <!-- /container -->
