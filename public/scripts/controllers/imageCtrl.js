@@ -7,6 +7,13 @@ app.controller('imageCtrl', ['$scope', '$location','imageService',
             $scope.sidebar = true;
         };
 
+        $scope.getFormattedTags = function(tags) {
+                var list = [];
+                angular.forEach(tags, function(item){
+                    list.push(item.text);
+                });
+               return list.toString();
+            };
 
         //Init data
         $scope.init();

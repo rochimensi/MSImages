@@ -6,7 +6,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             };
 
             $scope.save = function () {
-                $scope.imageService.update($scope.current.id, {id: $scope.current.id, name: $scope.name, text: $scope.type});
+                imageService.update({id: $scope.id, name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.files});
                 $location.path("\images");
             };
 
@@ -25,8 +25,8 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                 $scope.name = $scope.current.name;
                 $scope.description = $scope.current.description;
                 $scope.tags = $scope.current.tags;
-
-            };
+                $scope.id = $routeParams.imageId;
+             };
 
             //Initialization
             $scope.init();

@@ -48,11 +48,13 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
 
     };
     //edit element to array
-    this.edit = function (Item) {
-        Item.id = ++cont;
-        images.push(Item);
-        //post file name, upload file (input) method = ?
-        $http.post("/",Item) //lo manda al server
+    this.update = function (Image) {
+        var elementId = _.find(images, function(Item){return Item.id == Image.id});
+        var index = images.indexOf(elementId);
+        images[index].name = Image.name;
+        images[index].description = Image.description;
+        images[index].tags = Image.tags;
+        $http.put("/",Image) //lo manda al server
 
     };
 
