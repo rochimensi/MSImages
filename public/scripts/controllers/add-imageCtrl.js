@@ -6,7 +6,8 @@ app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fi
         $scope.save = function() {
             var formIsvalid = $scope.name && $scope.description && $scope.tags;
             if(formIsvalid) {
-                imageService.create({name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.files});
+                imageService.create({name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.file});
+                console.log("$scope.file  "+$scope.file);
                 $scope.imageName = $scope.name;
 
                 $location.path("\images");

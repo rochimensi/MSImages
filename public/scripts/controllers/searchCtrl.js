@@ -5,20 +5,26 @@ app.controller('searchCtrl',['$scope', '$route','imageService','imageData',
             $scope.titleView = "Search Results (XX)";
             $scope.sidebar = 'true';
             $scope.keyword = $route.current.params.keyword;
-            imageData.getByName($scope.keyword)
+            $scope.search($scope.keyword);
+
+         };
+
+        $scope.getFormattedTags = function(tags) {
+            var list = [];
+            angular.forEach(tags, function(item){
+                list.push(item.text);
+            });
+            return list.toString();
+        };
+
+        $scope.search = function(word){
+           imageData.getByName(word)
                 .then(function (data) {
-                   $scope.images = data;
+                    $scope.images = data;
                 });
          };
 
-        $scope.search = function(){
-           $scope.images = imageService.getAll();
-         };
 
-        $scope.imageList = function(){
-            $scope.images = images;
-
-        }
 
         //Init data
         $scope.init();

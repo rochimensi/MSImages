@@ -9,19 +9,22 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
                 { text: 'Tag1' },
                 { text: 'Tag2' },
                 { text: 'Tag3' }
-            ]
+            ],
+            logotype:'uploads/descarga.png'
         },
         {
             name:'Flowers 2',
             description:'Description of image 2',
             id:'2',
-            tags: [{text: 'blue'}]
+            tags: [{text: 'blue'}],
+            logotype:'uploads/1465355_390814357716435_1044122934_n.png'
         },
         {
             name:'Flowers 3',
             description:'Description of image 3',
             id:'3',
-            tags:[{text: 'green'}]
+            tags:[{text: 'green'}],
+            logotype:'uploads/descarga.jpg'
         }];
 
     //return the array

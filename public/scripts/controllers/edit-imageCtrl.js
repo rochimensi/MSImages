@@ -25,6 +25,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                 $scope.name = $scope.current.name;
                 $scope.description = $scope.current.description;
                 $scope.tags = $scope.current.tags;
+                $scope.imageSrc = $scope.current.logotype;
                 $scope.id = $routeParams.imageId;
              };
 
