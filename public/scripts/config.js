@@ -1,7 +1,7 @@
 //Controllers
 
 // Creación del módulo que engloba todos los controllers
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngTagsInput']);
 
 // Configuración de las rutas
 app.config(function($routeProvider) {
@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
         })
         .when('/image-upload', {
             templateUrl	: '../partials/image-upload.html',
-            controller 	: 'image-uploadCtrl'
+            controller 	: 'add-imageCtrl'
         })
         .when('/about', {
             templateUrl : '../partials/about.html',
@@ -22,6 +22,18 @@ app.config(function($routeProvider) {
         .when('/contact', {
             templateUrl : '../partials/contact.html',
             controller 	: 'contactCtrl'
+        })
+        .when('/images', {
+            templateUrl : '../partials/search_results.html',
+            controller 	: 'imageCtrl'
+        })
+        .when('/search_results/:keyword', {
+            templateUrl : '../partials/search_results.html',
+            controller 	: 'searchCtrl'
+        })
+        .when('/edit-image/:imageId', {
+            templateUrl : '../partials/image-upload.html',
+            controller 	: 'edit-imageCtrl'
         })
         .otherwise({
             redirectTo: '/'

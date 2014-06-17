@@ -1,0 +1,44 @@
+app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fileReader',
+            function ($scope, $http, $location, imageService,fileReader) {
+
+
+
+        $scope.save = function() {
+            var formIsvalid = $scope.name && $scope.description && $scope.tags;
+            if(formIsvalid) {
+                imageService.create({name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.file});
+                console.log("$scope.file  "+$scope.file);
+                $scope.imageName = $scope.name;
+
+                $location.path("\images");
+            }
+        };
+
+        $scope.getFile = function () {
+                    $scope.progress = 0;
+                    fileReader.readAsDataUrl($scope.file, $scope)
+                        .then(function(result) {
+                            $scope.imageSrc = result;
+                        });
+        };
+
+        $scope.cancel = function () {
+           $location.path("/");
+        };
+        $scope.init = function () {
+            $scope.titleView = "ADD Image";
+            $scope.sidebar = 'false';
+            $scope.tags = [
+                { text: 'Tag1' },
+                { text: 'Tag2' },
+                { text: 'Tag3' }
+            ];
+
+        };
+        //Initialization
+        $scope.init();
+    }
+]);
+
+//services como parametro
+// service http.get ()
