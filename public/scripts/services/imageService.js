@@ -41,13 +41,14 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     this.getByName = function (ImageName) {
         return _.find(images, function(itemImage){
             return itemImage.name == ImageName});
+        //Get /images); item por page and pageNumber 1 los siguientes
     };
     //add a new element to array
     this.create = function (Item) {
         Item.id = ++cont;
         images.push(Item);
         //post file name, upload file (input) method = ?
-        $http.post("/",Item) //lo manda al server
+        $http.post("/image",Item) //lo manda al server
 
     };
     //edit element to array
@@ -57,7 +58,15 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         images[index].name = Image.name;
         images[index].description = Image.description;
         images[index].tags = Image.tags;
-        $http.put("/",Image) //lo manda al server
+        $http.put("/image/"+Image.id,Image) //lo manda al server
+
+    };
+    //delete element to array
+    this.delete = function (Image) {
+        var elementId = _.find(images, function(Item){return Item.id == Image.id});
+        var index = images.indexOf(elementId);
+        //ELIMINAR
+        $http.delete("/image/"+Image.id) //lo manda al server
 
     };
 
