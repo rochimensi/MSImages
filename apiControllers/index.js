@@ -5,18 +5,18 @@
  */
 module.exports = function (app) {
     "use strict";
-    var fs = require('fs'),
-        path = require('path'),
+    var fs = app.msiGlobals.fs,
+        path = app.msiGlobals.path,
         log = app.msiGlobals.log;
 
-    app.msiGlobals.controllers = app.msiGlobals.controllers || [];
+    app.msiGlobals.apiControllers = app.msiGlobals.apiControllers || [];
 
     fs.readdirSync(__dirname).forEach(function (fileName) {
         if (fileName !== "index.js" && path.extname(fileName) === '.js') {
             var controller = require(path.join(__dirname, fileName))(app);
             if (controller && controller.name) {
                 log.info('Loading API controller: ' + controller.name);
-                app.msiGlobals.controllers[controller.name] = controller;
+                app.msiGlobals.apiControllers[controller.name] = controller;
             }
         }
     });

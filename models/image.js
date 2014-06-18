@@ -2,13 +2,14 @@
 
 module.exports = function() {
     var Mongoose = require('mongoose');
+    var uuid = require('node-uuid');
 
-    var imageSchema = new Mongoose.Schema({
-        title: {type: String, required: true},
+    var ImageSchema = new Mongoose.Schema({
+        name: {type: String, required: true},
         contributor: {type: String},
         description: {type: String},
         tags: [
-            {type: String}
+            {text: {type: String}}
         ],
         downloads: {type: Number},
         views: {type: Number},
@@ -20,11 +21,19 @@ module.exports = function() {
             height: {type: Number},
             width: {type: Number}
         },
-        shape: {type: String}
+        shape: {type: String},
+        path: {type: String}
+    });
+
+    ImageSchema.pre('save', function (next) {
+        if (this._id === undefined) {
+            this._id = uuid.v1();
+        }
+        next();
     });
 
     return {
         name: "ImageModel",
-        model: Mongoose.model('Image', imageSchema)
+        model: Mongoose.model('Image', ImageSchema)
     };
 };
