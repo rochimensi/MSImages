@@ -3,11 +3,23 @@ var express = require('express'),
     db = require('./config/db'),
     fs = require('fs'),
     http = require('http'),
-    path = require('path');
+    path = require('path'),
+    q = require('q'),
+    log = require(path.join(__dirname, './utils/logger'))();
 
 app.msiGlobals = {};
+app.msiGlobals.fs = fs;
+app.msiGlobals.log = log;
+app.msiGlobals.path = path;
+app.msiGlobals.q = q;
 
-app.msiGlobals.log = require(path.join(__dirname, './utils/logger'))();
+app.registerAction = function(httpMethod, url, callback){
+    log.info('registering action for ' + httpMethod + ' ' + url);
+    var urlAndCallback = [url];
+    urlAndCallback.push(callback);
+    app[httpMethod].apply(app, urlAndCallback);
+};
+
 require(path.join(__dirname, '/models'))(app);
 require(path.join(__dirname, '/businessControllers'))(app);
 require(path.join(__dirname, '/apiControllers'))(app);
@@ -20,42 +32,6 @@ app.use(express.static(__dirname + "/public"));
 
 app.get('/', function(req, res){
     res.sendfile(__dirname + "/public/index.html");
-});
-
-app.get('/uploads', function(req, res){
-    fs.readFile(__dirname + '/uploads/Ro', "binary", function(error, file) {
-        if(error) {
-            res.writeHead(500, {"Content-Type": "text/plain"});
-            res.write(error + "\n");
-            res.end();
-        } else {
-
-            res.writeHead(200, {"Content-Type": "image/png"});
-            res.write(file, "binary");
-
-        }
-    });
-});
-
-app.post('/', function(req, res){
-    var tmp_path = req.files.uploadedfile.path;
-    var serverPath = app.get('uploadDir') + req.files.uploadedfile.name;
-
-    fs.rename(tmp_path, serverPath, function(error){
-        if(error) {
-            res.send(error);
-            return;
-        }
-        else {
-            fs.unlink(tmp_path, function() {
-                if (error) throw error;
-                res.send('File uploaded to: ' + serverPath + ' - ' + req.files.uploadedfile.size + ' bytes');
-            });
-        }
-    });
-    console.log(req.files);
-    console.log("------");
-    console.log(req.body);
 });
 
 http.createServer(app).listen(app.get('port'), function() {

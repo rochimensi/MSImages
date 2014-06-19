@@ -44,13 +44,26 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         //Get /images); item por page and pageNumber 1 los siguientes
     };
     //add a new element to array
-    this.create = function (Item) {
-        Item.id = ++cont;
-        images.push(Item);
-        //post file name, upload file (input) method = ?
-        $http.post("/image",Item) //lo manda al server
+    this.create = function (imageName, imageDescription, imageTags, imageFile) {
+        var tagsData = [];
+        var fd = new FormData();
 
+        fd.append('name', imageName);
+        fd.append('description', imageDescription);
+        imageTags.forEach(function(tag){
+            tagsData.push(tag.text);
+        });
+        fd.append('tags', tagsData);
+        fd.append('file', imageFile);
+
+        return $http.post("/api/images", fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        });
+       /* Item.id = ++cont;
+        images.push(Item);*/
     };
+
     //edit element to array
     this.update = function (Image) {
         var elementId = _.find(images, function(Item){return Item.id == Image.id});

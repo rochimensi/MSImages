@@ -1,6 +1,3 @@
-/**
- * Created on 18/04/2014.
- */
 var mongoose = require( 'mongoose' );
 var path = require('path');
 var log = require(path.join(__dirname, '../utils/logger'))();

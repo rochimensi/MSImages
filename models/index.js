@@ -5,8 +5,8 @@
  */
 module.exports = function (app) {
     "use strict";
-    var fs = require('fs'),
-        path = require('path'),
+    var fs = app.msiGlobals.fs,
+        path = app.msiGlobals.path,
         log = app.msiGlobals.log;
 
     app.msiGlobals.models = app.msiGlobals.models || [];

@@ -1,33 +1,37 @@
-app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fileReader',
-            function ($scope, $http, $location, imageService,fileReader) {
+app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader',
+    function ($scope, $location, imageService, fileReader) {
 
-
-
-        $scope.save = function() {
+        $scope.save = function () {
+            $scope.submitted = true;
             var formIsvalid = $scope.name && $scope.description && $scope.tags;
             if(formIsvalid) {
-                imageService.create({name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.file});
-                console.log("$scope.file  "+$scope.file);
-                $scope.imageName = $scope.name;
-
-                $location.path("\images");
+                imageService.create($scope.name, $scope.description, $scope.tags, $scope.file)
+                    .success(function (data, status, headers, config) {
+                        $scope.submitted = false;
+                        $location.path('/images');
+                    })
+                    .error(function (current, status, headers, config) {
+                        console.log(current.err); // TODO: Display error on view.
+                    });
             }
         };
 
-        $scope.getFile = function () {
-                    $scope.progress = 0;
-                    fileReader.readAsDataUrl($scope.file, $scope)
-                        .then(function(result) {
-                            $scope.imageSrc = result;
-                        });
+        $scope.cancel = function () {
+            $location.path("/");
         };
 
-        $scope.cancel = function () {
-           $location.path("/");
+        $scope.getFile = function () {
+            $scope.progress = 0;
+            fileReader.readAsDataUrl($scope.file, $scope)
+                .then(function(result) {
+                    $scope.imageSrc = result;
+                });
         };
+
         $scope.init = function () {
-            $scope.titleView = "ADD Image";
-            $scope.sidebar = 'false';
+            $scope.titleView = "Upload new image";
+            $scope.submitted = false;
+            // TODO: these tags are just an example. Will be removed.
             $scope.tags = [
                 { text: 'Tag1' },
                 { text: 'Tag2' },
@@ -35,10 +39,7 @@ app.controller('add-imageCtrl',['$scope', '$http','$location','imageService','fi
             ];
 
         };
+
         //Initialization
         $scope.init();
-    }
-]);
-
-//services como parametro
-// service http.get ()
+    }]);
