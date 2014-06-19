@@ -9,7 +9,7 @@ module.exports = function() {
         contributor: {type: String},
         description: {type: String},
         tags: [
-            {text: {type: String}}
+            {type: String}
         ],
         downloads: {type: Number},
         views: {type: Number},

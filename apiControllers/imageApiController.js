@@ -58,11 +58,11 @@ module.exports = function (app) {
             });
     };
 
-    app.registerAction('get',    '/images',     Controller.list);
-    app.registerAction('get',    '/images/:id', Controller.read);
-    app.registerAction('post',   '/images',     Controller.create);
-    app.registerAction('put',    '/images/:id', Controller.edit);
-    app.registerAction('delete', '/images/:id', Controller.delete);
+    app.registerAction('get',    '/api/images',     Controller.list);
+    app.registerAction('get',    '/api/images/:id', Controller.read);
+    app.registerAction('post',   '/api/images',     Controller.create);
+    app.registerAction('put',    '/api/images/:id', Controller.edit);
+    app.registerAction('delete', '/api/images/:id', Controller.delete);
 
     return Controller;
 };
