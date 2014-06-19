@@ -14,8 +14,8 @@ module.exports = function (app) {
     };
 
     Controller.create = function(req, callback){
-        var tmp_path = req.files.uploadedfile.path;
-        var serverPath = uploadDir + req.files.uploadedfile.name;
+        var tmp_path = req.files.file.path;
+        var serverPath = uploadDir + req.files.file.name;
 
         fs.rename(tmp_path, serverPath, function(error){
             if(error) {
@@ -24,10 +24,18 @@ module.exports = function (app) {
             }
             else {
                 fs.unlink(tmp_path, function() {
-                    if (error) throw error;
-                    var image = new Image(req.body);
-                    image.path = serverPath;
-                    callback(error, image);
+                    if (error) {
+                        throw error;
+                    } else {
+                        var file = req.files.file;
+                        var image = new Image(req.body);
+                        image.size = file.size;
+                        image.mimeType = file.type;
+                        image.path = serverPath;
+                        image.save(function (error, image) {
+                            callback(error, image);
+                        });
+                    }
                 });
             }
         });
