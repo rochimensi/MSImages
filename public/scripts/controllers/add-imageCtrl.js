@@ -30,6 +30,8 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.init = function () {
             $scope.titleView = "Upload new image";
             $scope.submitted = false;
+            $scope.defaultContributorSelected = undefined;
+            $scope.contributors = imageService.getContributors();
             // TODO: these tags are just an example. Will be removed.
             $scope.tags = [
                 { text: 'Tag1' },

@@ -4,6 +4,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         {
             name:'Flowers 1',
             description:'Description of image 1',
+            contributor:'Celeste Senoseain',
             id:'1',
             tags:[
                 { text: 'Tag1' },
@@ -15,6 +16,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         {
             name:'Flowers 2',
             description:'Description of image 2',
+            contributor:'Rosario Mensi',
             id:'2',
             tags: [{text: 'blue'}],
             logotype:'uploads/1465355_390814357716435_1044122934_n.png'
@@ -22,6 +24,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         {
             name:'Flowers 3',
             description:'Description of image 3',
+            contributor:'Juan Diego Raimondi',
             id:'3',
             tags:[{text: 'green'}],
             logotype:'uploads/descarga.jpg'
@@ -31,7 +34,10 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     this.getAll = function () {
         return images;
     };
-
+    this.getContributors = function(){
+        var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
+        return contributor;
+    }
     //generate search by id in the current array
     this.getById = function (ImageId) {
           return _.find(images, function(itemImage){
