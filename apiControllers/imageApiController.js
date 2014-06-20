@@ -12,53 +12,33 @@ module.exports = function (app) {
     Controller.list = function(req, res){
         var imageController_read = q.denodeify(ImageController.read);
         imageController_read(req)
-            .then(function(data) {
-                res.send(200, data)
-            }, function(error) {
-                res.send(error)
-            });
+            .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 
     Controller.read = function(req, res){
         var imageController_read = q.denodeify(ImageController.read);
         imageController_read(req)
-            .then(function(data) {
-                res.send(200, data)
-            }, function(error) {
-                res.send(error)
-            });
+            .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 
     Controller.create = function(req, res){
         if(req.files.file) {
             var imageController_create = q.denodeify(ImageController.create);
             imageController_create(req.body, req.files.file)
-                .then(function (data) {
-                    res.send(200, data)
-                }, function (error) {
-                    res.send(error)
-                });
+                .then(function (data) {res.send(200, data)}, function (error) {res.send(error)});
         } else res.send(400);
     };
 
     Controller.edit = function(req, res){
         var imageController_edit = q.denodeify(ImageController.edit);
         imageController_edit(req)
-            .then(function(data) {
-                res.send(200, data)
-            }, function(error) {
-                res.send(error)
-            });
+            .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 
     Controller.delete = function(req, res){
         var imageController_delete = q.denodeify(ImageController.delete);
         imageController_delete(req)
-            .then(function(data) {
-                res.send(200, data)
-            }, function(error) {
-                res.send(error)
-            });
+            .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 
     app.registerAction('get',    '/api/images',     Controller.list);
