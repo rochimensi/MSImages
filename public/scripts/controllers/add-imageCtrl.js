@@ -3,8 +3,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
 
         $scope.save = function () {
             $scope.submitted = true;
-            var formIsvalid = $scope.name && $scope.description && $scope.tags;
-            if(formIsvalid) {
+            if($scope.name && $scope.file) {
                 imageService.create($scope.name, $scope.description, $scope.tags, $scope.file)
                     .success(function (data, status, headers, config) {
                         $scope.submitted = false;

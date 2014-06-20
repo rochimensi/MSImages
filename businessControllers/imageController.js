@@ -1,9 +1,9 @@
 module.exports = function (app) {
     "use strict";
 
-    var fs = app.msiGlobals.fs;
-    var Image = app.msiGlobals.models.ImageModel.model;
-    var uploadDir = app.get('uploadDir');
+    var fs = app.msiGlobals.fs,
+        Image = app.msiGlobals.models.ImageModel.model,
+        uploadDir = app.get('uploadDir');
 
     var Controller = {
         name: "ImageController"
@@ -13,9 +13,9 @@ module.exports = function (app) {
 
     };
 
-    Controller.create = function(req, callback){
-        var tmp_path = req.files.file.path;
-        var serverPath = uploadDir + req.files.file.name;
+    Controller.create = function(imageData, imageFile, callback){
+        var tmp_path = imageFile.path;
+        var serverPath = uploadDir + imageFile.name;
 
         fs.rename(tmp_path, serverPath, function(error){
             if(error) {
@@ -27,10 +27,9 @@ module.exports = function (app) {
                     if (error) {
                         throw error;
                     } else {
-                        var file = req.files.file;
-                        var image = new Image(req.body);
-                        image.size = file.size;
-                        image.mimeType = file.type;
+                        var image = new Image(imageData);
+                        image.size = imageFile.size;
+                        image.mimeType = imageFile.type;
                         image.path = serverPath;
                         image.save(function (error, image) {
                             callback(error, image);
