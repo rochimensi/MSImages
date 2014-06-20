@@ -3,6 +3,7 @@ module.exports = function (app) {
 
     var fs = app.msiGlobals.fs,
         Image = app.msiGlobals.models.ImageModel.model,
+        q = app.msiGlobals.q,
         uploadDir = app.get('uploadDir');
 
     var Controller = {
@@ -13,31 +14,21 @@ module.exports = function (app) {
 
     };
 
-    Controller.create = function(imageData, imageFile, callback){
+    Controller.create = function(imageData, imageFile){
         var tmp_path = imageFile.path;
         var serverPath = uploadDir + imageFile.name;
+        var fs_rename = q.denodeify(fs.rename);
+        var fs_unlink = q.denodeify(fs.unlink);
 
-        fs.rename(tmp_path, serverPath, function(error){
-            if(error) {
-                callback(error);
-                return;
-            }
-            else {
-                fs.unlink(tmp_path, function() {
-                    if (error) {
-                        throw error;
-                    } else {
-                        var image = new Image(imageData);
-                        image.size = imageFile.size;
-                        image.mimeType = imageFile.type;
-                        image.path = serverPath;
-                        image.save(function (error, image) {
-                            callback(error, image);
-                        });
-                    }
-                });
-            }
-        });
+        return fs_rename(tmp_path, serverPath)
+            .then(function() { return fs_unlink(tmp_path) })
+            .then(function(){
+                var image = new Image(imageData);
+                image.size = imageFile.size;
+                image.mimeType = imageFile.type;
+                image.path = serverPath;
+                return image.save();
+            });
     };
 
     Controller.edit = function(req, callback){
