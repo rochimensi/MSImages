@@ -32,12 +32,14 @@ module.exports = function (app) {
     };
 
     Controller.create = function(req, res){
-        imageController_create(req)
-            .then(function(data) {
-                res.send(200, data)
-            }, function(error) {
-                res.send(error)
-            });
+        if(req.files.file) {
+            imageController_create(req.body, req.files.file)
+                .then(function (data) {
+                    res.send(200, data)
+                }, function (error) {
+                    res.send(error)
+                });
+        } else res.send(400);
     };
 
     Controller.edit = function(req, res){

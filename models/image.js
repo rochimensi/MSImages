@@ -11,11 +11,11 @@ module.exports = function() {
         tags: [
             {type: String}
         ],
-        downloads: {type: Number},
-        views: {type: Number},
+        downloads: {type: Number, default: 0},
+        views: {type: Number, default: 0},
         uploadedOn: { type: Date, default: Date.now },
         lastDownload: {type: Date},
-        fileExtension: {type: String},
+        mimeType: {type: String},
         size: {type: String},
         dimensions: {
             height: {type: Number},

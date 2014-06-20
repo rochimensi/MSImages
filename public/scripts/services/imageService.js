@@ -51,7 +51,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         fd.append('name', imageName);
         fd.append('description', imageDescription);
         imageTags.forEach(function(tag){
-            tagsData.push(tag.text);
+            fd.append('tags', tag.text);
         });
         fd.append('tags', tagsData);
         fd.append('file', imageFile);
