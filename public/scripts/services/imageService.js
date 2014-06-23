@@ -79,14 +79,22 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         fd.append('name', contributorName);
         fd.append('description', contributorDescription);
 
+        var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
+        //return $http.get("/api/contributor");
+        return contributor;
 
-        return $http.post("/api/contributor", fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        });
+//        return $http.post("/api/contributor", fd, {
+//            transformRequest: angular.identity,
+//            headers: {'Content-Type': undefined}
+//        });
         /* Item.id = ++cont;
          images.push(Item);*/
     };
+    this.getContributorById = function(contribId){
+        var contributor = [images[0].contributor];
+        //return $http.get("/api/contributor");
+        return contributor;
+    }
     //edit element to array
     this.update = function (imageId, imageName, imageDescription, imageContributor,imageTags,imageFile) {
         var tagsData = [];

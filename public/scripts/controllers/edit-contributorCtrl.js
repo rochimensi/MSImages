@@ -1,7 +1,10 @@
-app.controller('add-contributorCtrl',['$scope','$location','imageService',
-    function($scope, $location,imageService){
+app.controller('edit-contributorCtrl',['$scope','$location','$routeParams','imageService',
+    function($scope, $location,$routeParams,imageService){
 
-        $scope.titleView = "ADD Contributor";
+        $scope.titleView = "Edit Contributor";
+        $scope.current = imageService.getContributorById($routeParams.imageId);
+        $scope.name = 'Celeste';//$scope.current.name;
+        $scope.description = 'Descripcion'; $scope.current.description;
 
         $scope.save = function () {
             $scope.submitted = true;
@@ -25,3 +28,4 @@ app.controller('add-contributorCtrl',['$scope','$location','imageService',
 
     }
 ])
+
