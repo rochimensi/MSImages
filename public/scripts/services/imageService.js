@@ -50,12 +50,13 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         //Get /images); item por page and pageNumber 1 los siguientes
     };
     //add a new element to array
-    this.create = function (imageName, imageDescription, imageTags, imageFile) {
+    this.create = function (imageName, imageDescription, imageContributor, imageTags, imageFile) {
         var tagsData = [];
         var fd = new FormData();
 
         fd.append('name', imageName);
         fd.append('description', imageDescription);
+        fd.append('contributor',imageContributor);
         imageTags.forEach(function(tag){
             fd.append('tags', tag.text);
         });
@@ -71,13 +72,23 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
 
     //edit element to array
-    this.update = function (Image) {
-        var elementId = _.find(images, function(Item){return Item.id == Image.id});
-        var index = images.indexOf(elementId);
-        images[index].name = Image.name;
-        images[index].description = Image.description;
-        images[index].tags = Image.tags;
-        $http.put("/image/"+Image.id,Image) //lo manda al server
+    this.update = function (imageId, imageName, imageDescription, imageContributor,imageTags,imageFile) {
+        var tagsData = [];
+        var fd = new FormData();
+
+        fd.append('name', imageName);
+        fd.append('description', imageDescription);
+        fd.append('contributor',imageContributor);
+        imageTags.forEach(function(tag){
+            fd.append('tags', tag.text);
+        });
+        fd.append('tags', tagsData);
+        fd.append('file', imageFile);
+
+        return $http.put("/api/images"+imageId, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        });
 
     };
     //delete element to array
