@@ -27,6 +27,9 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                     });
             };
 
+            $scope.addContributor = function(){
+                $location.path('/add-contributor');
+            };
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';

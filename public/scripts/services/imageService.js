@@ -36,6 +36,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
     this.getContributors = function(){
         var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
+        //return $http.get("/api/contributor");
         return contributor;
     }
     //generate search by id in the current array
@@ -71,6 +72,21 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         images.push(Item);*/
     };
 
+    this.addContributor = function (contributorName, contributorDescription) {
+        var tagsData = [];
+        var fd = new FormData();
+
+        fd.append('name', contributorName);
+        fd.append('description', contributorDescription);
+
+
+        return $http.post("/api/contributor", fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        });
+        /* Item.id = ++cont;
+         images.push(Item);*/
+    };
     //edit element to array
     this.update = function (imageId, imageName, imageDescription, imageContributor,imageTags,imageFile) {
         var tagsData = [];

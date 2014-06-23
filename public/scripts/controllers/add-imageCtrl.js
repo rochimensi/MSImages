@@ -18,6 +18,9 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.cancel = function () {
             $location.path("/");
         };
+        $scope.addContributor = function(){
+            $location.path('/add-contributor');
+        };
 
         $scope.getFile = function () {
             $scope.progress = 0;

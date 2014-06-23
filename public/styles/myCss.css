@@ -32,8 +32,16 @@
     clear: both;
     padding-top: 15px;
 }
+.image-middleContainerContributor{
+    width: 40%;
+    clear: both;
+    padding-top: 15px;
+}
 .image-logotypeContainer{
     width: 100%;
+}
+.add{
+    margin-top: 40px;
 }
 .image-name{
     height: 34px;
