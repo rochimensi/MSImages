@@ -4,9 +4,10 @@ module.exports = function (app) {
     var fs = app.msiGlobals.fs,
         q = app.msiGlobals.q,
         ImageController = app.msiGlobals.controllers.ImageController,
+        imageController_list = q.denodeify(ImageController.list),
         imageController_read = q.denodeify(ImageController.read),
         imageController_create = q.denodeify(ImageController.create),
-        imageController_edit = q.denodeify(ImageController.edit),
+        imageController_edit = q.denodeify(ImageController.update),
         imageController_delete = q.denodeify(ImageController.delete);
 
     var Controller = {
@@ -14,7 +15,7 @@ module.exports = function (app) {
     };
 
     Controller.list = function(req, res){
-        imageController_read(req)
+        imageController_list(req.query)
             .then(function(data) {
                 res.send(200, data)
             }, function(error) {
@@ -23,11 +24,11 @@ module.exports = function (app) {
     };
 
     Controller.read = function(req, res){
-        imageController_read(req)
+        imageController_read(req.params.id)
             .then(function(data) {
                 res.send(200, data)
             }, function(error) {
-                res.send(error)
+                res.send(500, error)
             });
     };
 
@@ -43,7 +44,7 @@ module.exports = function (app) {
     };
 
     Controller.edit = function(req, res){
-        imageController_edit(req)
+        imageController_edit(req.params.id, req.body, req.files.file)
             .then(function(data) {
                 res.send(200, data)
             }, function(error) {
@@ -52,7 +53,7 @@ module.exports = function (app) {
     };
 
     Controller.delete = function(req, res){
-        imageController_delete(req)
+        imageController_delete(req.params.id)
             .then(function(data) {
                 res.send(200, data)
             }, function(error) {
@@ -60,6 +61,20 @@ module.exports = function (app) {
             });
     };
 
+    Controller.getContributors = function(req, res){
+        var imageController_getContributors = q.denodeify(ImageController.getContributors);
+        imageController_getContributors()
+            .then(function(data){ res.send(200, data) }, function(error){ res.send(error) });
+    };
+
+    Controller.getTags = function(req, res){
+        var imageController_getTags = q.denodeify(ImageController.getTags);
+        imageController_getTags()
+            .then(function(data){ res.send(200, data) }, function(error){ res.send(error) });
+    };
+
+    app.registerAction('get',    '/api/images/contributors', Controller.getContributors);
+    app.registerAction('get',    '/api/images/tags', Controller.getTags);
     app.registerAction('get',    '/api/images',     Controller.list);
     app.registerAction('get',    '/api/images/:id', Controller.read);
     app.registerAction('post',   '/api/images',     Controller.create);

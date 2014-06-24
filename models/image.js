@@ -5,6 +5,7 @@ module.exports = function() {
     var uuid = require('node-uuid');
 
     var ImageSchema = new Mongoose.Schema({
+        _id: {type: String},
         name: {type: String, required: true},
         contributor: {type: String},
         description: {type: String},
@@ -31,6 +32,26 @@ module.exports = function() {
         }
         next();
     });
+
+    ImageSchema.statics.getContributors = function(callback){
+        this
+            .find()
+            .select('contributor')
+            .sort('contributor')
+            .distinct('contributor', function(error, contributors){
+                callback(error, contributors);
+            });
+    };
+
+    ImageSchema.statics.getTags = function(callback){
+        this
+            .find()
+            .select('tags')
+            .sort('tags')
+            .distinct('tags', function(error, tags){
+                callback(error, tags);
+            });
+    };
 
     return {
         name: "ImageModel",
