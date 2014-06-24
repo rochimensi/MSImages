@@ -53,32 +53,32 @@ module.exports = function (app) {
     };
 
     Controller.update = function(imageId, imageData, imageFile, callback){
-        if(imageFile){
-            FileController.saveFile(imageFile, function(error, serverPath){
-                if(!error) {
-                    updateImage(imageId, imageData, serverPath, function(error, image){
-                        if(error){
-                            callback(error);
-                            return;
-                        } else if(!image) {
-                            callback(404);
-                        } else callback(error, image);
-                    });
-                } else {
-                    callback(error);
-                    return;
-                }
-            });
-        } else {
-            updateImage(imageId, imageData, null, function(error, image){
-                if(error){
-                    callback(error);
-                    return;
-                } else if(!image) {
-                    callback(404);
-                } else callback(error, image);
-            });
-        }
+        // Delete old file
+        Image.findById(imageId, function(error, image){
+           if(!error && !image) {
+               callback(404);
+           } else if(image) {
+               FileController.deleteFile(image.path, function(error){
+                   // Save new file
+                   FileController.saveFile(imageFile, function(error, serverPath){
+                       if(!error) {
+                           if(serverPath) imageData.path = serverPath;
+                           Image.findByIdAndUpdate(imageId, imageData, function(error, image){
+                               if(error){
+                                   callback(error);
+                                   return;
+                               } else if(!image) {
+                                   callback(404);
+                               } else callback(error, image);
+                           });
+                       } else {
+                           callback(error);
+                           return;
+                       }
+                   });
+               });
+           }
+        });
     };
 
     Controller.delete = function(imageId, callback){
