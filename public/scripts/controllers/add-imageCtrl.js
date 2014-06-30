@@ -18,10 +18,24 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.cancel = function () {
             $location.path("/");
         };
+
+
         $scope.addContributor = function(){
-            $location.path('/add-contributor');
+        //    $location.path('/add-contributor');
+            $scope.addContrib = true;
+        };
+        $scope.cancelContributor = function(){
+            $scope.addContrib = false;
         };
 
+        $scope.saveContributor = function () {
+            $scope.submitted = true;
+            if($scope.nameContributor) {
+                $scope.contributors = imageService.addContributor($scope.nameContributor);
+                $scope.defaultContributorSelected = $scope.nameContributor;
+                $scope.addContrib = false;
+            }
+        };
         $scope.getFile = function () {
             $scope.progress = 0;
             fileReader.readAsDataUrl($scope.file, $scope)
@@ -32,6 +46,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
 
         $scope.init = function () {
             $scope.titleView = "Upload new image";
+            $scope.addContrib = false;
             $scope.submitted = false;
             $scope.defaultContributorSelected = undefined;
             $scope.contributors = imageService.getContributors();

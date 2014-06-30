@@ -28,6 +28,14 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             id:'3',
             tags:[{text: 'green'}],
             logotype:'uploads/descarga.jpg'
+        },
+        {
+            name:'Flowers 4',
+            description:'Description of image 4',
+            contributor:' ',
+            id:'4',
+            tags:[{text: 'green'}],
+            logotype:'uploads/descarga.jpg'
         }];
 
     //return the array
@@ -72,14 +80,14 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         images.push(Item);*/
     };
 
-    this.addContributor = function (contributorName, contributorDescription) {
+    this.addContributor = function (contributorName) {
         var tagsData = [];
         var fd = new FormData();
 
         fd.append('name', contributorName);
-        fd.append('description', contributorDescription);
+        images[3].contributor = contributorName;
 
-        var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
+        var contributor = [images[0].contributor,images[1].contributor,images[2].contributor, images[3].contributor];
         //return $http.get("/api/contributor");
         return contributor;
 
