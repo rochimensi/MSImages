@@ -4,15 +4,43 @@
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="#">Current Search</a></li>
                 <li><a href="#">Keyword(s)</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
-            </ul>
-
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-            </ul>
+             </ul>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="page-header">
+                TAGS
+            </div>
+            <div ng-repeat="tag in tags">
+                <small>
+                    <input type="checkbox"> {{ tag.name }}
+                </small>
+            </div>
+        </div><!-- end col-md-6-->
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="page-header">
+                CONTRIBUTOR
+            </div>
+            <div ng-repeat="contributor in contributors">
+                <small>
+                    <input type="checkbox"> {{contributor}}
+                </small>
+            </div>
+        </div><!-- end col-md-6-->
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="page-header">
+                SHAPE
+            </div>
+            <div ng-repeat="shape in shapes">
+                <small>
+                    <input type="checkbox"> {{shape}}
+                </small>
+            </div>
+        </div><!-- end col-md-6-->
     </div>
 </div>

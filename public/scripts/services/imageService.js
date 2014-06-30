@@ -5,6 +5,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name:'Flowers 1',
             description:'Description of image 1',
             contributor:'Celeste Senoseain',
+            shape:'Vertical',
             id:'1',
             tags:[
                 { text: 'Tag1' },
@@ -17,6 +18,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name:'Flowers 2',
             description:'Description of image 2',
             contributor:'Rosario Mensi',
+            shape:'Horizontal',
             id:'2',
             tags: [{text: 'blue'}],
             logotype:'uploads/1465355_390814357716435_1044122934_n.png'
@@ -25,6 +27,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name:'Flowers 3',
             description:'Description of image 3',
             contributor:'Juan Diego Raimondi',
+            shape:'Square',
             id:'3',
             tags:[{text: 'green'}],
             logotype:'uploads/descarga.jpg'
@@ -33,6 +36,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name:'Flowers 4',
             description:'Description of image 4',
             contributor:' ',
+            shape:'Vertical',
             id:'4',
             tags:[{text: 'green'}],
             logotype:'uploads/descarga.jpg'
@@ -46,6 +50,11 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
         //return $http.get("/api/contributor");
         return contributor;
+    }
+    this.getShapes = function(){
+        var shapes = [images[0].shape,images[1].shape,images[2].shape];
+        //return $http.get("/api/contributor");
+        return shapes;
     }
     //generate search by id in the current array
     this.getById = function (ImageId) {
