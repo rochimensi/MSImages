@@ -35,6 +35,18 @@ app.config(function($routeProvider) {
             templateUrl : '../partials/image-upload.html',
             controller 	: 'edit-imageCtrl'
         })
+        .when('/add-contributor',{
+            templateUrl : '../partials/add-contributor.html',
+            controller:'add-contributorCtrl'
+        })
+        .when('/contributor-list', {
+            templateUrl : '../partials/contributor-list.html',
+            controller 	: 'contributorCtrl'
+        })
+        .when('/edit-contributor', {
+            templateUrl : '../partials/add-contributor.html',
+            controller 	: 'edit-contributorCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

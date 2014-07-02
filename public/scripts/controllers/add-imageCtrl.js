@@ -4,7 +4,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.save = function () {
             $scope.submitted = true;
             if($scope.name && $scope.file) {
-                imageService.create($scope.name, $scope.description, $scope.tags, $scope.file)
+                imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.file)
                     .success(function (data, status, headers, config) {
                         $scope.submitted = false;
                         $location.path('/images');
@@ -19,6 +19,23 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             $location.path("/");
         };
 
+
+        $scope.addContributor = function(){
+        //    $location.path('/add-contributor');
+            $scope.addContrib = true;
+        };
+        $scope.cancelContributor = function(){
+            $scope.addContrib = false;
+        };
+
+        $scope.saveContributor = function () {
+            $scope.submitted = true;
+            if($scope.nameContributor) {
+                $scope.contributors = imageService.addContributor($scope.nameContributor); //no tengo que llamar al servicio
+                $scope.defaultContributorSelected = $scope.nameContributor;
+                $scope.addContrib = false;
+            }
+        };
         $scope.getFile = function () {
             $scope.progress = 0;
             fileReader.readAsDataUrl($scope.file, $scope)
@@ -29,7 +46,10 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
 
         $scope.init = function () {
             $scope.titleView = "Upload new image";
+            $scope.addContrib = false;
             $scope.submitted = false;
+            $scope.defaultContributorSelected = undefined;
+            $scope.contributors = imageService.getContributors();
             // TODO: these tags are just an example. Will be removed.
             $scope.tags = [
                 { text: 'Tag1' },

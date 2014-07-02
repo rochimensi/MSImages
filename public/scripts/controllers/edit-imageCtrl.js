@@ -6,8 +6,17 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             };
 
             $scope.save = function () {
-                imageService.update({id: $scope.id, name: $scope.name, description: $scope.description, tags: $scope.tags, obj: $scope.files});
-                $location.path("\images");
+                $scope.submitted = true;
+                if($scope.name && $scope.file) {
+                    imageService.update($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.file)
+                        .success(function (data, status, headers, config) {
+                            $scope.submitted = false;
+                            $location.path('/images');
+                        })
+                        .error(function (current, status, headers, config) {
+                            console.log(current.err); // TODO: Display error on view.
+                        });
+                }
             };
 
             $scope.getFile = function () {
@@ -18,12 +27,17 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                     });
             };
 
+            $scope.addContributor = function(){
+                $location.path('/add-contributor');
+            };
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
                 $scope.current = imageService.getById($routeParams.imageId);
                 $scope.name = $scope.current.name;
                 $scope.description = $scope.current.description;
+                $scope.defaultContributorSelected = $scope.current.contributor;
+                $scope.contributors = imageService.getContributors();
                 $scope.tags = $scope.current.tags;
                 $scope.imageSrc = $scope.current.logotype;
                 $scope.id = $routeParams.imageId;
