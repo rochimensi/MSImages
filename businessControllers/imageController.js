@@ -3,40 +3,102 @@ module.exports = function (app) {
 
     var fs = app.msiGlobals.fs,
         Image = app.msiGlobals.models.ImageModel.model,
-        q = app.msiGlobals.q,
+        FileController = app.msiGlobals.controllers.FileController,
         uploadDir = app.get('uploadDir');
 
     var Controller = {
         name: "ImageController"
     };
 
-    Controller.read = function(req, callback){
+    var updateImage = function(imageId, imageData, serverPath, callback){
+        if(serverPath) imageData.path = serverPath;
+        Image.findByIdAndUpdate(imageId, imageData, function(error, image){
+            if(error){
+                callback(error);
+                return;
+            } else {
+                if(!image) {
+                    callback(404);
+                } else callback(error, image);
+            }
+        });
+    };
+
+    Controller.list = function(options){
 
     };
 
-    Controller.create = function(imageData, imageFile){
-        var tmp_path = imageFile.path;
-        var serverPath = uploadDir + imageFile.name;
-        var fs_rename = q.denodeify(fs.rename);
-        var fs_unlink = q.denodeify(fs.unlink);
+    Controller.read = function(imageId, callback){
+        Image.findById(imageId, function(error, image){
+           if(error){
+               callback(error);
+               return;
+           } else if(!image) {
+               callback(404);
+           } else callback(error, image);
+        });
+    };
 
-        return fs_rename(tmp_path, serverPath)
-            .then(function() { return fs_unlink(tmp_path) })
-            .then(function(){
-                var image = new Image(imageData);
-                image.size = imageFile.size;
-                image.mimeType = imageFile.type;
-                image.path = serverPath;
-                return image.save();
+    Controller.create = function(imageData, imageFile, callback){
+        FileController.saveFile(imageFile, function(error, serverPath){
+            var image = new Image(imageData);
+            image.size = imageFile.size;
+            image.mimeType = imageFile.type;
+            image.path = serverPath;
+            console.log(serverPath);
+            image.save(function (error, image) {
+                callback(error, image);
             });
+        });
     };
 
-    Controller.edit = function(req, callback){
-
+    Controller.update = function(imageId, imageData, imageFile, callback){
+        Image.findByIdAndUpdate(imageId, imageData, function(error, image){
+            if(error){
+                callback(error);
+                return;
+            } else if(!image) {
+                callback(404);
+            } else callback(error, image);
+        });
     };
 
-    Controller.delete = function(req, callback){
+    Controller.delete = function(imageId, callback){
+        Image.findByIdAndRemove(imageId, function(error, image){
+            if(error){
+                callback(error);
+                return;
+            } else {
+                if(!image) {
+                    callback(404);
+                } else {
+                    FileController.deleteFile(image.path, function(error){
+                        if(error){
+                            callback(error);
+                            return;
+                        } else callback(error, image);
+                    });
+                }
+            }
+        });
+    };
 
+    Controller.getContributors = function(callback){
+        Image.getContributors(function(error, contributors){
+            if(error) {
+                callback(error);
+                return;
+            } else callback(error, contributors);
+        });
+    };
+
+    Controller.getTags = function(callback){
+        Image.getTags(function(error, tags){
+            if(error) {
+                callback(error);
+                return;
+            } else callback(error, tags);
+        });
     };
 
     return Controller;
