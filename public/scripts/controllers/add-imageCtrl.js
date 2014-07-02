@@ -31,7 +31,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.saveContributor = function () {
             $scope.submitted = true;
             if($scope.nameContributor) {
-                $scope.contributors = imageService.addContributor($scope.nameContributor);
+                $scope.contributors = imageService.addContributor($scope.nameContributor); //no tengo que llamar al servicio
                 $scope.defaultContributorSelected = $scope.nameContributor;
                 $scope.addContrib = false;
             }

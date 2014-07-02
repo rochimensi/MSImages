@@ -3,6 +3,9 @@
         <div class="title-image">
             <h3 class="ng-binding">{{titleView}}</h3>
         </div>
+        <div class="row-fluid">
+            <alert ng-repeat="alert in alerts" type="alert.type" close="alert.close($index)">{{alert.msg}}</alert>
+        </div>
         <div class="main-body">
             <form name="uploadImageForm">
                 <div class="image-middleContainer">
