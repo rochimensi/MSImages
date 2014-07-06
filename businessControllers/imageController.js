@@ -10,20 +10,6 @@ module.exports = function (app) {
         name: "ImageController"
     };
 
-    var updateImage = function(imageId, imageData, serverPath, callback){
-        if(serverPath) imageData.path = serverPath;
-        Image.findByIdAndUpdate(imageId, imageData, function(error, image){
-            if(error){
-                callback(error);
-                return;
-            } else {
-                if(!image) {
-                    callback(404);
-                } else callback(error, image);
-            }
-        });
-    };
-
     Controller.list = function(options){
 
     };
