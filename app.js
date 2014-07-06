@@ -29,8 +29,6 @@ require(path.join(__dirname, '/apiControllers'))(app);
 
 app.set('port', process.env.PORT || 4040);
 
-
-
 app.use(express.static(__dirname + "/public"));
 
 app.get('/', function(req, res){
