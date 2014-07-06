@@ -2,6 +2,7 @@
 
 module.exports = function() {
     var Mongoose = require('mongoose');
+    var sizeOf = require('image-size');
     var uuid = require('node-uuid');
 
     var ImageSchema = new Mongoose.Schema({
@@ -32,6 +33,20 @@ module.exports = function() {
         }
         next();
     });
+
+    ImageSchema.statics.createImage = function(imageData, imageFile, path, callback) {
+        var image = new this(imageData);
+        image.size = imageFile.size;
+        image.mimeType = imageFile.type;
+        image.path = path;
+        sizeOf(path, function (error, dimensions) {
+            image.dimensions.height = dimensions.height;
+            image.dimensions.width = dimensions.width;
+            image.save(function (error, image) {
+                callback(error, image);
+            });
+        });
+    };
 
     ImageSchema.statics.getContributors = function(callback){
         this

@@ -27,14 +27,14 @@ module.exports = function (app) {
 
     Controller.create = function(imageData, imageFile, callback){
         FileController.saveFile(imageFile, function(error, serverPath){
-            var image = new Image(imageData);
-            image.size = imageFile.size;
-            image.mimeType = imageFile.type;
-            image.path = serverPath;
-            console.log(serverPath);
-            image.save(function (error, image) {
-                callback(error, image);
-            });
+            if(error){
+                callback(error);
+                return;
+            } else {
+                Image.createImage(imageData, imageFile, serverPath, function(error, image){
+                   callback(error, image);
+                });
+            }
         });
     };
 
