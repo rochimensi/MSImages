@@ -49,8 +49,8 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             $scope.addContrib = false;
             $scope.submitted = false;
             $scope.defaultContributorSelected = undefined;
-            $scope.contributors = imageService.getContributors();
-            // TODO: these tags are just an example. Will be removed.
+            imageService.getContributors()
+                .success(function(data){  $scope.contributors = data } );
             $scope.tags = [
                 { text: 'Tag1' },
                 { text: 'Tag2' },

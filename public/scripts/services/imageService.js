@@ -42,24 +42,28 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             logotype:'uploads/descarga.jpg'
         }];
 
-    //return the array
-    this.getAll = function () {
-        return images;
+    //Get all images
+    this.getImages = function () {
+        return $http.get("/api/images");
     };
+
+    //Get all contributors
     this.getContributors = function(){
-        var contributor = [images[0].contributor,images[1].contributor,images[2].contributor];
-        //return $http.get("/api/contributor");
-        return contributor;
+      return $http.get("/api/images/contributors");
+    }
+    //Get all Tags
+    this.getTags = function(){
+        return $http.get("/api/images/tags");
     }
     this.getShapes = function(){
         var shapes = [images[0].shape,images[1].shape,images[2].shape];
         //return $http.get("/api/contributor");
         return shapes;
     }
-    //generate search by id in the current array
-    this.getById = function (ImageId) {
-          return _.find(images, function(itemImage){
-            return itemImage.id == ImageId});
+
+    //generate search by id
+    this.getImageById = function (ImageId) {
+        return $http.get("/api/images/"+ImageId);
     };
     //generate search by id in the current array
     this.getByName = function (ImageName) {
@@ -126,7 +130,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         fd.append('tags', tagsData);
         fd.append('file', imageFile);
 
-        return $http.put("/api/images"+imageId, fd, {
+        return $http.put("/api/images/"+imageId, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         });
@@ -134,10 +138,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
     //delete element to array
     this.delete = function (Image) {
-        var elementId = _.find(images, function(Item){return Item.id == Image.id});
-        var index = images.indexOf(elementId);
-        //ELIMINAR
-        $http.delete("/image/"+Image.id) //lo manda al server
+        $http.delete("/api/images/"+Image.id)
 
     };
 

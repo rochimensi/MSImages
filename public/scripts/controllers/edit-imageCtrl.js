@@ -33,14 +33,17 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
-                $scope.current = imageService.getById($routeParams.imageId);
-                $scope.name = $scope.current.name;
-                $scope.description = $scope.current.description;
-                $scope.defaultContributorSelected = $scope.current.contributor;
-                $scope.contributors = imageService.getContributors();
-                $scope.tags = $scope.current.tags;
-                $scope.imageSrc = $scope.current.logotype;
-                $scope.id = $routeParams.imageId;
+                imageService.getById($routeParams.imageId)
+                    .success(function(data){  $scope.current = data;
+                        $scope.name = $scope.current.name;
+                        $scope.description = $scope.current.description;
+                        $scope.defaultContributorSelected = $scope.current.contributor;
+                        imageService.getContributors()
+                            .success(function(data){  $scope.contributors = data } );
+                        $scope.tags = $scope.current.tags;
+                        $scope.imageSrc = $scope.current.logotype;
+                        $scope.id = $routeParams.imageId;} );
+
              };
 
             //Initialization

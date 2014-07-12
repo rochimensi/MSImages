@@ -3,7 +3,8 @@ app.controller('imageCtrl', ['$scope', '$location','imageService',
 
         $scope.init = function () {
             $scope.titleView = "Recently Uploaded Images";
-            $scope.images = imageService.getAll(); // get last image
+            imageService.getImages()
+                .success(function(data){$scope.images = data}); // get last image
             $scope.sidebar = true;
         };
 
