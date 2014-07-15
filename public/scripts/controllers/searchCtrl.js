@@ -23,7 +23,7 @@ app.controller('searchCtrl',['$scope', '$route','imageService','imageData',
         };
 
         $scope.search = function(word){
-           imageData.getByName(word)
+            imageService.getImageByName(word)
                 .then(function (data) {
                     $scope.images = data;
                 });

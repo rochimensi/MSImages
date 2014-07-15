@@ -62,13 +62,12 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     }
 
     //generate search by id
-    this.getImageById = function (ImageId) {
+    this.getByImageId = function (ImageId) {
         return $http.get("/api/images/"+ImageId);
     };
     //generate search by id in the current array
-    this.getByName = function (ImageName) {
-        return _.find(images, function(itemImage){
-            return itemImage.name == ImageName});
+    this.getImageByName = function (ImageName) {
+       return $http.get("/api/images/"+ImageName);
         //Get /images); item por page and pageNumber 1 los siguientes
     };
     //add a new element to array
@@ -117,10 +116,9 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         return contributor;
     }
     //edit element to array
-    this.update = function (imageId, imageName, imageDescription, imageContributor,imageTags,imageFile) {
+    this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags) {
         var tagsData = [];
         var fd = new FormData();
-
         fd.append('name', imageName);
         fd.append('description', imageDescription);
         fd.append('contributor',imageContributor);
@@ -128,8 +126,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             fd.append('tags', tag.text);
         });
         fd.append('tags', tagsData);
-        fd.append('file', imageFile);
-
+        console.log("changes"+fd);
         return $http.put("/api/images/"+imageId, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}

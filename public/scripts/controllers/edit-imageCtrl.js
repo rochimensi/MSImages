@@ -7,10 +7,10 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
 
             $scope.save = function () {
                 $scope.submitted = true;
-                if($scope.name && $scope.file) {
-                    imageService.update($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.file)
+                if($scope.name) {
+                    imageService.updateImage($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags)
                         .success(function (data, status, headers, config) {
-                            $scope.submitted = false;
+                           // $scope.submitted = false;
                             $location.path('/images');
                         })
                         .error(function (current, status, headers, config) {
@@ -33,7 +33,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
-                imageService.getById($routeParams.imageId)
+                imageService.getByImageId($routeParams.imageId)
                     .success(function(data){  $scope.current = data;
                         $scope.name = $scope.current.name;
                         $scope.description = $scope.current.description;
@@ -41,7 +41,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
-                        $scope.imageSrc = $scope.current.logotype;
+                        $scope.showimageSrc = false;
                         $scope.id = $routeParams.imageId;} );
 
              };
