@@ -31,7 +31,7 @@ module.exports = function (app) {
 
     Controller.edit = function(req, res){
         var imageController_edit = q.denodeify(ImageController.edit);
-        imageController_edit(req.params.id, req.body, req.files.file)
+        imageController_edit(req.params.id, req.body)
             .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 

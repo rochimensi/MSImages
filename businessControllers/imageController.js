@@ -38,7 +38,7 @@ module.exports = function (app) {
         });
     };
 
-    Controller.update = function(imageId, imageData, imageFile, callback){
+    Controller.update = function(imageId, imageData, callback){
         Image.findByIdAndUpdate(imageId, imageData, function(error, image){
             if(error){
                 callback(error);
