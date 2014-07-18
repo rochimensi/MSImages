@@ -10,8 +10,8 @@ module.exports = function (app) {
     };
 
     Controller.list = function(req, res){
-        var imageController_read = q.denodeify(ImageController.read);
-        imageController_read(req)
+        var imageController_list = q.denodeify(ImageController.list);
+        imageController_list()
             .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 

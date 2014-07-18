@@ -48,6 +48,12 @@ module.exports = function() {
         });
     };
 
+    ImageSchema.statics.getImages = function(callback) {
+        this.find({}, function(error, images){
+            callback(error, images);
+        });
+    };
+
     ImageSchema.statics.getContributors = function(callback){
         this
             .find()

@@ -10,8 +10,13 @@ module.exports = function (app) {
         name: "ImageController"
     };
 
-    Controller.list = function(options){
-
+    Controller.list = function(callback){
+        Image.getImages(function(error, images){
+            if(error){
+                callback(error);
+                return;
+            } else callback(error, images);
+        });
     };
 
     Controller.read = function(imageId, callback){
