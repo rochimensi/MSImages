@@ -117,17 +117,21 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     }
     //edit element to array
     this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags) {
-        var tagsData = [];
-        var fd = new FormData();
-        fd.append('name', imageName);
-        fd.append('description', imageDescription);
-        fd.append('contributor',imageContributor);
-        imageTags.forEach(function(tag){
+        var updatedImage = {
+        name: imageName,
+        contributor: imageContributor,
+        description: imageDescription,
+
+        tags:imageTags
+        }
+
+
+       /* imageTags.forEach(function(tag){
             fd.append('tags', tag.text);
-        });
-        fd.append('tags', tagsData);
-        console.log("changes"+fd);
-        return $http.put("/api/images/"+imageId, fd, {
+        });*/
+
+        console.log("changes"+ updatedImage);
+        return $http.put("/api/images/"+imageId, updatedImage, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         });
