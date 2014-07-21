@@ -10,22 +10,13 @@ module.exports = function (app) {
         name: "ImageController"
     };
 
-    var updateImage = function(imageId, imageData, serverPath, callback){
-        if(serverPath) imageData.path = serverPath;
-        Image.findByIdAndUpdate(imageId, imageData, function(error, image){
+    Controller.list = function(callback){
+        Image.getImages(function(error, images){
             if(error){
                 callback(error);
                 return;
-            } else {
-                if(!image) {
-                    callback(404);
-                } else callback(error, image);
-            }
+            } else callback(error, images);
         });
-    };
-
-    Controller.list = function(options){
-
     };
 
     Controller.read = function(imageId, callback){
@@ -41,18 +32,18 @@ module.exports = function (app) {
 
     Controller.create = function(imageData, imageFile, callback){
         FileController.saveFile(imageFile, function(error, serverPath){
-            var image = new Image(imageData);
-            image.size = imageFile.size;
-            image.mimeType = imageFile.type;
-            image.path = serverPath;
-            console.log(serverPath);
-            image.save(function (error, image) {
-                callback(error, image);
-            });
+            if(error){
+                callback(error);
+                return;
+            } else {
+                Image.createImage(imageData, imageFile, serverPath, function(error, image){
+                   callback(error, image);
+                });
+            }
         });
     };
 
-    Controller.update = function(imageId, imageData, imageFile, callback){
+    Controller.update = function(imageId, imageData, callback){
         Image.findByIdAndUpdate(imageId, imageData, function(error, image){
             if(error){
                 callback(error);
