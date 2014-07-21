@@ -139,7 +139,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
     //delete element to array
     this.delete = function (Image) {
-        $http.delete("/api/images/"+Image.id)
+        return $http.delete("/api/images/"+Image.id);
 
     };
 
