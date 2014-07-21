@@ -29,9 +29,9 @@ module.exports = function (app) {
         } else res.send(400);
     };
 
-    Controller.edit = function(req, res){
-        var imageController_edit = q.denodeify(ImageController.edit);
-        imageController_edit(req.params.id, req.body)
+    Controller.update = function(req, res){
+        var imageController_update = q.denodeify(ImageController.update);
+        imageController_update(req.params.id, req.body)
             .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
     };
 
@@ -67,7 +67,7 @@ module.exports = function (app) {
     app.registerAction('get',    '/api/images',     Controller.list);
     app.registerAction('get',    '/api/images/:id', Controller.read);
     app.registerAction('post',   '/api/images',     Controller.create);
-    app.registerAction('put',    '/api/images/:id', Controller.edit);
+    app.registerAction('put',    '/api/images/:id', Controller.update);
     app.registerAction('delete', '/api/images/:id', Controller.delete);
     app.registerAction('get',    '/api/images/download/:id', Controller.download);
 
