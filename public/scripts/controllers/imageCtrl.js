@@ -4,7 +4,10 @@ app.controller('imageCtrl', ['$scope', '$location','imageService',
         $scope.init = function () {
             $scope.titleView = "Recently Uploaded Images";
             imageService.getImages()
-                .success(function(data){$scope.images = data}); // get last image
+                .success(function(data){
+                  $scope.images = data;
+                  console.log(data);}); // get last image
+
             $scope.sidebar = true;
         };
 
