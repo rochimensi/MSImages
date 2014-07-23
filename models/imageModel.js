@@ -42,6 +42,11 @@ module.exports = function() {
         sizeOf(path, function (error, dimensions) {
             image.dimensions.height = dimensions.height;
             image.dimensions.width = dimensions.width;
+            if(image.dimensions.height == image.dimensions.width)
+                image.shape = "square";
+            else if(image.dimensions.height < image.dimensions.width)
+                image.shape = "landscape";
+            else image.shape = "portrait";
             image.save(function (error, image) {
                 callback(error, image);
             });
