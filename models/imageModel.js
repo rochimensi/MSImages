@@ -31,6 +31,9 @@ module.exports = function() {
         if (this._id === undefined) {
             this._id = uuid.v1();
         }
+
+        this.path = this.path.substring(this.path.indexOf("uploads"), this.path.length);
+        
         next();
     });
 
