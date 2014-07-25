@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2" ng-include="'partials/sidebar.html'" ng-show='sidebar'></div>
+          <div class="col-md-2" ng-include="'partials/sidebar.html'" ng-show='sidebar'></div>
           <div class="col-md-10">
                 <div class="title-image main-body">
                     <h3 class="ng-binding">{{titleView}}</h3>
@@ -10,6 +10,8 @@
                    <tbody class="main-body">
                     <tr class="row" ng-repeat="image in images">
                         <td class="col-md-4"> <a href="#/edit-image/{{image._id}}" class="search-preview thumbnail"><img ng-src="uploads/descarga.png"></a></td>
+                        <td><a href="#/edit-image/{{image._id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td ng-click="delete(image._id)"><span class="glyphicon glyphicon-trash"></span></td>
                     </tr>
                     </tbody>
                 </table>

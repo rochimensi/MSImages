@@ -27,8 +27,30 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                     });
             };
 
+            $scope.cancel = function () {
+                $location.path("/");
+            };
+
             $scope.addContributor = function(){
-                $location.path('/add-contributor');
+                $scope.addContrib = true;
+            };
+            $scope.cancelContributor = function(){
+                $scope.addContrib = false;
+            };
+
+            // Save new contributor
+            $scope.saveContributor = function () {
+                var contributors = [];
+                $scope.submitted = true;
+                if($scope.nameContributor) {
+                    $scope.defaultContributorSelected = $scope.nameContributor;
+                    imageService.getContributors()
+                    .success(function(data){
+                        data.push($scope.nameContributor);
+                        $scope.contributors = data;
+                    });
+                    $scope.addContrib = false;
+                }
             };
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
