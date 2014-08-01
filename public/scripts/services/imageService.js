@@ -50,13 +50,19 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
 
     // Update Image
     this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags) {
-        var updatedImage = {
-        name: imageName,
-        contributor: imageContributor,
-        description: imageDescription,
-        tags:imageTags
-        }
+        var formattedTags = [];
+        var tags = [];
 
+        angular.forEach(imageTags, function(tag) {
+            formattedTags.push(tag.text);
+        });
+        var updatedImage = {
+            name: imageName,
+            contributor: imageContributor,
+            description: imageDescription,
+            tags : formattedTags
+
+        }
         return $http.put("/api/images/"+imageId, updatedImage);
 
     };
