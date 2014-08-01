@@ -16,7 +16,11 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     }
 
     this.getShapes = function(){
-        //return $http.get("/api/images/shapes");
+        return $http.get("/api/images");
+    }
+
+    this.getDimensions = function(){
+          return $http.get("/api/images");
     }
 
     //Get Image by Id
@@ -68,8 +72,13 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
 
     //Delete Image of DB //Parameter ID_Image
-    this.delete = function (id) {
+    this.deleteImage = function (id) {
         return $http.delete("/api/images/"+id);
     };
+
+    //Download an image
+    this.downloadImage = function(id){
+        return $http.get("api/images/download/"+id);
+    }
 
 }]);

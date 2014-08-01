@@ -53,6 +53,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.init = function () {
             $scope.titleView = "Upload new image";
             $scope.addContrib = false;
+            $scope.size = false;
             $scope.submitted = false;
             $scope.showimageSrc = true;
             $scope.defaultContributorSelected = undefined;

@@ -9,8 +9,10 @@
                 <table class="table table-hover main-body">
                    <tbody class="main-body">
                     <tr class="row" ng-repeat="image in images">
-                        <td class="col-md-4"> <a href="#/edit-image/{{image._id}}" class="search-preview thumbnail"><img ng-src="uploads/descarga.png"></a></td>
+                        <td class="col-md-4"> <a href="#/edit-image/{{image._id}}" class="search-preview thumbnail"><img ng-src={{image.path}}></a></td>
                         <td><a href="#/edit-image/{{image._id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><a href="api/images/download/{{image._id}}"><span class="glyphicon glyphicon-download"></span></a></td>
+
                         <td ng-click="delete(image._id)"><span class="glyphicon glyphicon-trash"></span></td>
                     </tr>
                     </tbody>
