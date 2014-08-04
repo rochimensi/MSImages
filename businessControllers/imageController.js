@@ -64,7 +64,7 @@ module.exports = function (app) {
                 if(!image) {
                     callback(404);
                 } else {
-                    FileController.deleteFile(image.path, function(error){
+                    FileController.deleteFile(image.absolutPath, function(error){
                         if(error){
                             callback(error);
                             return;
