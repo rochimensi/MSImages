@@ -2,6 +2,7 @@ module.exports = function (app) {
     "use strict";
 
     var fs = app.msiGlobals.fs,
+        log = app.msiGlobals.log,
         Image = app.msiGlobals.models.ImageModel.model,
         FileController = app.msiGlobals.controllers.FileController,
         uploadDir = app.get('uploadDir');
@@ -63,7 +64,7 @@ module.exports = function (app) {
                 if(!image) {
                     callback(404);
                 } else {
-                    FileController.deleteFile(image.path, function(error){
+                    FileController.deleteFile(image.absolutPath, function(error){
                         if(error){
                             callback(error);
                             return;
@@ -89,6 +90,12 @@ module.exports = function (app) {
                 callback(error);
                 return;
             } else callback(error, tags);
+        });
+    };
+
+    Controller.addDownload = function(image, callback){
+        Image.findByIdAndUpdate(image._id, { $inc : { downloads : 1 }}, function(error){
+            callback(error);
         });
     };
 
