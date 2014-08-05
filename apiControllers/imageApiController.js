@@ -57,8 +57,11 @@ module.exports = function (app) {
         var imageController_read = q.denodeify(ImageController.read);
         imageController_read(req.params.id)
         .then(function(data) {
-            var path = data.path;
-            res.download(path);
+            ImageController.addDownload(data, function(error) {
+                if(error)
+                res.send(500, error);
+                else res.download(data.absolutPath);
+            });
         }, function(error) {res.send(error)});
     };
 

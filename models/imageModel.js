@@ -24,7 +24,8 @@ module.exports = function() {
             width: {type: Number}
         },
         shape: {type: String},
-        path: {type: String}
+        path: {type: String},
+        absolutPath: {type: String}
     });
 
     ImageSchema.pre('save', function (next) {
@@ -32,7 +33,7 @@ module.exports = function() {
             this._id = uuid.v1();
         }
 
-        this.path = this.path.substring(this.path.indexOf("uploads"), this.path.length);
+        this.path = this.absolutPath.substring(this.absolutPath.indexOf("uploads"), this.absolutPath.length);
         
         next();
     });
@@ -41,7 +42,7 @@ module.exports = function() {
         var image = new this(imageData);
         image.size = imageFile.size;
         image.mimeType = imageFile.type;
-        image.path = path;
+        image.absolutPath = path;
         sizeOf(path, function (error, dimensions) {
             image.dimensions.height = dimensions.height;
             image.dimensions.width = dimensions.width;
