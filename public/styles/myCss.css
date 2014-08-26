@@ -5,7 +5,12 @@
     margin-left: 0;
 }
 .images-container{
-    height: 250px;
+    height: 300px;
+}
+.download-button{
+    background-color: #33B84E;
+    border-color: #33B84E;
+    color: #cc3318;
 }
 .title-image {
     border-bottom-style: solid;

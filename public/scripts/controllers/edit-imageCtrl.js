@@ -65,6 +65,9 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
+                        imageService.getByImageId($routeParams.imageId)
+                                .success(function(data){
+                                      $scope.image = data})
                         $scope.showimageSrc = false;
                         $scope.id = $routeParams.imageId;} );
 

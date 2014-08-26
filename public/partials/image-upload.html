@@ -42,14 +42,14 @@
                     </div>
                 </div>
 
-                <div class="image-middleContainer" ng-show="showimageSrc">
+                <div class="image-middleContainer">
                     <label>Preview</label>
                     <div class="image-logotypeContainer">
                         <div class="image-container">
                             <img class="default-image" ng-src="../styles/images/default_picture.jpg" ng-hide="imageSrc"/>
-                            <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="!imageSrc"/>
+                            <img class="image-preview" ng-src="{{image}}" ng-hide="!imageSrc"/>
                         </div>
-                        <div class="image-browse-image-container">
+                        <div class="image-browse-image-container" ng-show="showimageSrc">
                             <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
                             <div class="fileUpload btn btn-mob btn-primary">
                                 <span>Upload</span>
@@ -66,7 +66,9 @@
                 <div class="footer-image">
                     <button type="submit" ng-click="save()" class="btn-mob action-form footer-button">Save</button>
                     <button type="button" ng-click="cancel()" class="btn-mob action-form footer-button">Cancel</button>
+                    <button type="button" ng-click="download(id)" class="download-button action-form footer-button">DOWNLOAD</button>
                 </div> <!-- /container -->
+
             </form>
         </div>
     </div>
