@@ -42,14 +42,14 @@
                     </div>
                 </div>
 
-                <div class="image-middleContainer">
+                <div class="image-middleContainer" ng-show="showimageSrc">
                     <label>Preview</label>
                     <div class="image-logotypeContainer">
                         <div class="image-container">
                             <img class="default-image" ng-src="../styles/images/default_picture.jpg" ng-hide="imageSrc"/>
-                            <img class="image-preview" ng-src="{{image}}" ng-hide="!imageSrc"/>
+                            <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="!imageSrc"/>
                         </div>
-                        <div class="image-browse-image-container" ng-show="showimageSrc">
+                        <div class="image-browse-image-container">
                             <input id="uploadFile" name="uploadFile" class="image-name" placeholder="Choose File" disabled="disabled" value="{{imageName}}"/>
                             <div class="fileUpload btn btn-mob btn-primary">
                                 <span>Upload</span>
