@@ -53,6 +53,12 @@ module.exports = function (app) {
             .then(function(data){ res.send(200, data) }, function(error){ res.send(error) });
     };
 
+    Controller.getAlbums = function(req, res){
+        var imageController_getAlbums = q.denodeify(ImageController.getAlbums);
+        imageController_getAlbums()
+            .then(function(data){ res.send(200, data) }, function(error){ res.send(error) });
+    };
+
     Controller.download = function(req, res){
         var imageController_read = q.denodeify(ImageController.read);
         imageController_read(req.params.id)
@@ -67,6 +73,7 @@ module.exports = function (app) {
 
     app.registerAction('get',    '/api/images/contributors', Controller.getContributors);
     app.registerAction('get',    '/api/images/tags', Controller.getTags);
+    app.registerAction('get',    '/api/images/albums', Controller.getAlbums);
     app.registerAction('get',    '/api/images',     Controller.list);
     app.registerAction('get',    '/api/images/:id', Controller.read);
     app.registerAction('post',   '/api/images',     Controller.create);
