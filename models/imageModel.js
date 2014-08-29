@@ -8,6 +8,7 @@ module.exports = function() {
     var ImageSchema = new Mongoose.Schema({
         _id: {type: String},
         name: {type: String, required: true},
+        album: {type: String, required: true},
         contributor: {type: String},
         description: {type: String},
         tags: [
@@ -60,6 +61,16 @@ module.exports = function() {
     ImageSchema.statics.getImages = function(callback) {
         this.find({}, function(error, images){
             callback(error, images);
+        });
+    };
+
+    ImageSchema.statics.getAlbums = function(callback){
+        this
+        .find()
+        .select('album')
+        .sort('album')
+        .distinct('album', function(error, albums){
+            callback(error, albums);
         });
     };
 

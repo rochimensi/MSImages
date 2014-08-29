@@ -93,6 +93,15 @@ module.exports = function (app) {
         });
     };
 
+    Controller.getAlbums = function(callback){
+        Image.getAlbums(function(error, albums){
+            if(error) {
+                callback(error);
+                return;
+            } else callback(error, albums);
+        });
+    };
+
     Controller.addDownload = function(image, callback){
         Image.findByIdAndUpdate(image._id, { $inc : { downloads : 1 }}, function(error){
             callback(error);
