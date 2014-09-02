@@ -66,7 +66,7 @@ module.exports = function (app) {
             ImageController.addDownload(data, function(error) {
                 if(error)
                 res.send(500, error);
-                else res.download(data.absolutPath);
+                else res.download(data.absolutPath, data.fileName);
             });
         }, function(error) {res.send(error)});
     };
