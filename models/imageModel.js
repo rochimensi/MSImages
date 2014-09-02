@@ -8,7 +8,7 @@ module.exports = function() {
     var ImageSchema = new Mongoose.Schema({
         _id: {type: String},
         name: {type: String, required: true},
-        album: {type: String, required: true},
+        album: {type: String},
         contributor: {type: String},
         description: {type: String},
         tags: [
@@ -26,7 +26,8 @@ module.exports = function() {
         },
         shape: {type: String},
         path: {type: String},
-        absolutPath: {type: String}
+        absolutPath: {type: String},
+        fileName: {type: String}
     });
 
     ImageSchema.pre('save', function (next) {
