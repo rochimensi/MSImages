@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <div class="main-body"> <h3 class="ng-binding">{{titleView}}</h3></div>
+
+        <div class="row">
+           <div class="col-md-2">
+                <div>
+                    <img class="default-image" ng-src="../styles/images/default_picture.jpg" ng-hide="imageSrc"/>
+                    <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="!imageSrc"/>
+                </div>
+           </div>
+
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Name: </label> {{name}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Size: </label> {{size}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Description: </label> {{description}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Contributor: </label> {{defaultContributorSelected}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Tags: </label> {{tags}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="button" class="download-button"><a href="#/edit-image/{{image._id}}"> EDIT </a></button>
+                        <button type="button" class="download-button"><a href="api/images/download/{{image._id}}"> DOWNLOAD </a></button></div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

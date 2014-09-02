@@ -1,10 +1,6 @@
 app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageService','fileReader',
         function ($scope, $location, $routeParams, imageService, fileReader) {
 
-            $scope.cancel = function () {
-                $location.path("/");
-            };
-
             $scope.save = function () {
                 $scope.submitted = true;
                 if($scope.name) {

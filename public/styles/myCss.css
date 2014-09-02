@@ -23,6 +23,10 @@
     height: 195px;
     width: 100%;
 }
+.detailed-image{
+    width: 70%;
+    padding-top: 15px;
+}
 .search-preview{
     max-width: 50%;
     max-height: 50%;
