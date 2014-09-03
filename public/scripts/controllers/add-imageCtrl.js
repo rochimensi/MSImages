@@ -2,37 +2,43 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
     function ($scope, $location, imageService, fileReader) {
 
         $scope.save = function () {
+            var tags;
             $scope.submitted = true;
-            if($scope.name && $scope.file) {
-                imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.file)
+            if($scope.name && $scope.file && $scope.tags) {
+               imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected, $scope.tags, $scope.file)
                     .success(function (data, status, headers, config) {
                         $scope.submitted = false;
                         $location.path('/images');
                     })
                     .error(function (current, status, headers, config) {
-                        console.log(current.err); // TODO: Display error on view.
+                        console.log(current.err);
                     });
             }
         };
 
+
         $scope.cancel = function () {
-            $location.path("/");
+            $location.path("/images");
         };
 
 
         $scope.addContributor = function(){
-        //    $location.path('/add-contributor');
-            $scope.addContrib = true;
+           $scope.addContrib = true;
         };
         $scope.cancelContributor = function(){
             $scope.addContrib = false;
         };
 
         $scope.saveContributor = function () {
+            var contributors = [];
             $scope.submitted = true;
             if($scope.nameContributor) {
-                $scope.contributors = imageService.addContributor($scope.nameContributor); //no tengo que llamar al servicio
                 $scope.defaultContributorSelected = $scope.nameContributor;
+                imageService.getContributors()
+                .success(function(data){
+                    data.push($scope.nameContributor);
+                    $scope.contributors = data;
+                 });
                 $scope.addContrib = false;
             }
         };
@@ -48,9 +54,10 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             $scope.titleView = "Upload new image";
             $scope.addContrib = false;
             $scope.submitted = false;
+            $scope.showimageSrc = true;
             $scope.defaultContributorSelected = undefined;
-            $scope.contributors = imageService.getContributors();
-            // TODO: these tags are just an example. Will be removed.
+            imageService.getContributors()
+                .success(function(data){  $scope.contributors = data } );
             $scope.tags = [
                 { text: 'Tag1' },
                 { text: 'Tag2' },

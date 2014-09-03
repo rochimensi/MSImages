@@ -6,18 +6,10 @@ app.controller('searchCtrl',['$scope', '$route','imageService','imageData',
             $scope.sidebar = 'true';
             $scope.keyword = $route.current.params.keyword;
             $scope.search($scope.keyword);
-            $scope.tags = [
-                {
-                    name:'Flowers'
-                },
-                {
-                    name:'Red'
-                },
-                {
-                    name:'10x10'
-                }
-            ];
-            $scope.contributors = imageService.getContributors();
+            imageService.getTags()
+                .success(function(data){  $scope.tags = data } );
+            imageService.getContributors()
+                .success(function(data){  $scope.contributors = data } );
             $scope.shapes = imageService.getShapes();
 
          };
@@ -31,7 +23,7 @@ app.controller('searchCtrl',['$scope', '$route','imageService','imageData',
         };
 
         $scope.search = function(word){
-           imageData.getByName(word)
+            imageService.getImageByName(word)
                 .then(function (data) {
                     $scope.images = data;
                 });

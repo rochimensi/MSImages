@@ -7,10 +7,10 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
 
             $scope.save = function () {
                 $scope.submitted = true;
-                if($scope.name && $scope.file) {
-                    imageService.update($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.file)
+                if($scope.name) {
+                    imageService.updateImage($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags)
                         .success(function (data, status, headers, config) {
-                            $scope.submitted = false;
+                           // $scope.submitted = false;
                             $location.path('/images');
                         })
                         .error(function (current, status, headers, config) {
@@ -27,20 +27,45 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                     });
             };
 
+            $scope.cancel = function () {
+                $location.path("/");
+            };
+
             $scope.addContributor = function(){
-                $location.path('/add-contributor');
+                $scope.addContrib = true;
+            };
+            $scope.cancelContributor = function(){
+                $scope.addContrib = false;
+            };
+
+            // Save new contributor
+            $scope.saveContributor = function () {
+                var contributors = [];
+                $scope.submitted = true;
+                if($scope.nameContributor) {
+                    $scope.defaultContributorSelected = $scope.nameContributor;
+                    imageService.getContributors()
+                    .success(function(data){
+                        data.push($scope.nameContributor);
+                        $scope.contributors = data;
+                    });
+                    $scope.addContrib = false;
+                }
             };
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
-                $scope.current = imageService.getById($routeParams.imageId);
-                $scope.name = $scope.current.name;
-                $scope.description = $scope.current.description;
-                $scope.defaultContributorSelected = $scope.current.contributor;
-                $scope.contributors = imageService.getContributors();
-                $scope.tags = $scope.current.tags;
-                $scope.imageSrc = $scope.current.logotype;
-                $scope.id = $routeParams.imageId;
+                imageService.getByImageId($routeParams.imageId)
+                    .success(function(data){  $scope.current = data;
+                        $scope.name = $scope.current.name;
+                        $scope.description = $scope.current.description;
+                        $scope.defaultContributorSelected = $scope.current.contributor;
+                        imageService.getContributors()
+                            .success(function(data){  $scope.contributors = data } );
+                        $scope.tags = $scope.current.tags;
+                        $scope.showimageSrc = false;
+                        $scope.id = $routeParams.imageId;} );
+
              };
 
             //Initialization
