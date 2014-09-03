@@ -37,7 +37,6 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     //Create a new Image
     this.create = function (imageName, imageDescription, imageContributor, imageTags, imageFile) {
         var fd = new FormData();
-
         fd.append('name', imageName);
         fd.append('description', imageDescription);
         fd.append('contributor',imageContributor);
@@ -45,7 +44,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             fd.append('tags', tag.text);
         });
         fd.append('file', imageFile);
-
+       console.log(imageFile);
         return $http.post("/api/images", fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
