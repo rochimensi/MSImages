@@ -5,7 +5,9 @@ app.controller('imageCtrl', ['$scope', '$location','imageService', '$window',
             $scope.titleView = "Recently Uploaded Images";
             imageService.getImages()
                 .success(function(data){
-                  $scope.images = data})
+                  $scope.images = data;
+                 }
+            )
             $scope.sidebar = true;
             imageService.getTags()
             .success(function(data){  $scope.tags = data } );
