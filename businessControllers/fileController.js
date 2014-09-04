@@ -3,15 +3,21 @@ module.exports = function (app) {
 
     var fs = app.msiGlobals.fs,
         log = app.msiGlobals.log,
+        path = require('path'),
         uploadDir = app.get('uploadDir');
 
     var Controller = {
         name: "FileController"
     };
 
-    Controller.saveFile = function(file, callback) {
+    var getExtension = function(filename) {
+        var ext = path.extname(filename||'').split('.');
+        return ext[ext.length - 1];
+    };
+
+    Controller.saveFile = function(file, name, callback) {
         var tmp_path = file.path;
-        var serverPath = uploadDir + file.name;
+        var serverPath = uploadDir + name + '.' + getExtension(file.name);
 
         fs.rename(tmp_path, serverPath, function(error){
             if(error) {

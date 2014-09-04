@@ -5,6 +5,7 @@ module.exports = function (app) {
         log = app.msiGlobals.log,
         Image = app.msiGlobals.models.ImageModel.model,
         FileController = app.msiGlobals.controllers.FileController,
+        uuid = require('node-uuid'),
         uploadDir = app.get('uploadDir');
 
     var Controller = {
@@ -32,11 +33,14 @@ module.exports = function (app) {
     };
 
     Controller.create = function(imageData, imageFile, callback){
-        FileController.saveFile(imageFile, function(error, serverPath){
+        var _id = uuid.v1();
+        FileController.saveFile(imageFile, _id, function(error, serverPath){
             if(error){
                 callback(error);
                 return;
             } else {
+                imageData._id = _id;
+                imageData.fileName = imageFile.name;
                 Image.createImage(imageData, imageFile, serverPath, function(error, image){
                    callback(error, image);
                 });
