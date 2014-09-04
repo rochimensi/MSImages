@@ -26,10 +26,6 @@ app.controller('detailed-imageCtrl', ['$scope','$location','$routeParams','image
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
-                        imageService.getByImageId($routeParams.imageId)
-                                .success(function(data){
-                                      $scope.image = data;
-                                     })
                         $scope.imageSrc = $scope.current.path;
 
                     $scope.id = $routeParams.imageId;
