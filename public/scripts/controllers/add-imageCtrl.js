@@ -6,8 +6,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             $scope.submitted = true;
             if($scope.name && $scope.file && $scope.tags) {
                imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected, $scope.tags, $scope.file, $scope.defaultAlbumSelected)
-               console.log($scope.defaultAlbumSelected)
-                    .success(function (data, status, headers, config) {
+                   .success(function (data, status, headers, config) {
                           $location.path('/images');
                     })
                     .error(function (current, status, headers, config) {
