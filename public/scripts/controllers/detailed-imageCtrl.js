@@ -23,6 +23,7 @@ app.controller('detailed-imageCtrl', ['$scope','$location','$routeParams','image
                         $scope.description = $scope.current.description;
                         $scope.size = $scope.current.size;
                         $scope.defaultContributorSelected = $scope.current.contributor;
+                        $scope.defaultAlbumSelected = $scope.current.album;
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;

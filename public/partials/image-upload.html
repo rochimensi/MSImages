@@ -20,6 +20,7 @@
                 <div class="image-middleContainer" ng-show="size">
                     <label>Size: </label> {{size}}
                 </div>
+                <!-- Contributors -->
                 <div class="row">
                     <div class="col-md-6 image-middleContainerContributor">
                             <label>Contributor:</label>
@@ -41,7 +42,29 @@
                         </div>
                     </div>
                 </div>
+                <!-- Albums -->
+                <div class="row">
+                    <div class="col-md-6 image-middleContainerContributor">
+                        <label>Album:</label>
+                        <select type="text" class="form-control" name="defaultAlbumSelected" ng-model="defaultAlbumSelected" ng-options="album for album in albums">
+                            <option value="">Choose a default album</option></select>
 
+                    </div>
+                    <div class="col-md-1 add">
+                        <button ng-click="addAlbumButton()" class="btn btn-mob btn-primary"> + Add</button>
+                    </div>
+                    <div ng-show="addAlbum">
+                        <div class="col-md-3 image-middleContainerContributor">
+                            <label>New Album:</label>
+                            <input type="text" class="form-control" float= "left" name="album" ng-model="album" placeholder="Name Album" maxlength="50">
+                        </div>
+                        <div class="col-md-2 add">
+                            <button ng-click="saveAlbum()" class="btn-mob btn-primary"> + Save</button>
+                            <button ng-click="cancelAlbum()" class="btn-mob btn-primary"> + Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Preview Image -->
                 <div class="image-middleContainer" ng-show="showimageSrc">
                     <label>Preview</label>
                     <div class="image-logotypeContainer">
@@ -66,7 +89,7 @@
                 <div class="footer-image">
                     <button type="submit" ng-click="save()" class="btn-mob action-form footer-button">Save</button>
                     <button type="button" ng-click="cancel()" class="btn-mob action-form footer-button">Cancel</button>
-                </div> <!-- /container -->
+                </div>
 
             </form>
         </div>
