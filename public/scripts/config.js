@@ -35,6 +35,10 @@ app.config(function($routeProvider) {
             templateUrl : '../partials/image-upload.html',
             controller 	: 'edit-imageCtrl'
         })
+        .when('/detailed-image/:imageId', {
+            templateUrl : '../partials/detailed-image.html',
+            controller 	: 'detailed-imageCtrl'
+        })
         .when('/delete-image/:imageId', {
             templateUrl : '../partials/search_results.html',
             controller 	: 'imageCtrl'

@@ -1,10 +1,6 @@
 app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageService','fileReader',
         function ($scope, $location, $routeParams, imageService, fileReader) {
 
-            $scope.cancel = function () {
-                $location.path("/");
-            };
-
             $scope.save = function () {
                 $scope.submitted = true;
                 if($scope.name) {
@@ -55,10 +51,12 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.init = function () {
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
+                $scope.size = 'true';
                 imageService.getByImageId($routeParams.imageId)
                     .success(function(data){  $scope.current = data;
                         $scope.name = $scope.current.name;
                         $scope.description = $scope.current.description;
+                        $scope.size = $scope.current.size;
                         $scope.defaultContributorSelected = $scope.current.contributor;
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
