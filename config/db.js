@@ -1,6 +1,6 @@
 var mongoose = require( 'mongoose' );
 var path = require('path');
-var log = require(path.join(__dirname, '../utils/logger'))();
+var log = require(path.join(__dirname, '../app/utils/logger'))();
 
 var databaseUri = 'mongodb://localhost:27017/msi';
 
