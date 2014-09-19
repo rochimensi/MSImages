@@ -81,11 +81,6 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
                 .success(function(data){  $scope.contributors = data } );
             imageService.getAlbums()
             .success(function(data){  $scope.albums = data } );
-            $scope.tags = [
-                { text: 'Tag1' },
-                { text: 'Tag2' },
-                { text: 'Tag3' }
-            ];
 
         };
 

@@ -80,9 +80,9 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
+                        $scope.defaultAlbumSelected = $scope.current.album;
                         imageService.getAlbums()
-                        .success(function(data){  $scope.albums = data } );
-                        $scope.defaultAlbumSelectedSelected = $scope.current.album;
+                        .success(function(data){  $scope.albums = data;} );
                         $scope.showimageSrc = false;
                         $scope.id = $routeParams.imageId;} );
 

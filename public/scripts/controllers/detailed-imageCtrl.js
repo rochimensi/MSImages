@@ -28,8 +28,7 @@ app.controller('detailed-imageCtrl', ['$scope','$location','$routeParams','image
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
                         $scope.imageSrc = $scope.current.path;
-
-                    $scope.id = $routeParams.imageId;
+                        $scope.id = $routeParams.imageId;
                         } );
 
              };
