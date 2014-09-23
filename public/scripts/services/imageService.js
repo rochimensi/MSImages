@@ -56,7 +56,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
 
     // Update Image
-    this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags) {
+    this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags, imageAlbum) {
         var formattedTags = [];
         var tags = [];
 
@@ -67,7 +67,8 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name: imageName,
             contributor: imageContributor,
             description: imageDescription,
-            tags : formattedTags
+            tags : formattedTags,
+            album: imageAlbum
 
         }
         return $http.put("/api/images/"+imageId, updatedImage);

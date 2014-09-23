@@ -18,7 +18,8 @@ app.controller('detailed-imageCtrl', ['$scope','$location','$routeParams','image
                 $scope.titleView = "Detail View";
                 $scope.size = 'true';
                 imageService.getByImageId($routeParams.imageId)
-                    .success(function(data){  $scope.current = data;
+                    .success(function(data){
+                        $scope.current = data;
                         $scope.name = $scope.current.name;
                         $scope.description = $scope.current.description;
                         $scope.size = $scope.current.size;
@@ -29,7 +30,13 @@ app.controller('detailed-imageCtrl', ['$scope','$location','$routeParams','image
                         $scope.tags = $scope.current.tags;
                         $scope.imageSrc = $scope.current.path;
                         $scope.id = $routeParams.imageId;
+
                         } );
+                imageService.getImages()
+                .success(function(data){
+                    $scope.images = data;
+                }
+                )
 
              };
 
