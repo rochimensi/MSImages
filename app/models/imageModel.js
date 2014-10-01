@@ -5,6 +5,8 @@ module.exports = function() {
     var sizeOf = require('image-size');
     var uuid = require('node-uuid');
 
+    var defaultSort = 'name';
+
     var ImageSchema = new Mongoose.Schema({
         _id: {type: String},
         name: {type: String, required: true},
@@ -59,10 +61,16 @@ module.exports = function() {
         });
     };
 
-    ImageSchema.statics.getImages = function(callback) {
-        this.find({}, function(error, images){
-            callback(error, images);
-        });
+    ImageSchema.statics.getImages = function(options, callback) {
+        var sortBy = (!options.sortBy) ? defaultSort : options.sortBy;
+        this
+            .find()
+            .skip(options.itemsPerPage * (options.pageNumber - 1))
+            .limit(options.itemsPerPage)
+            .sort(sortBy)
+            .exec(function(error, images){
+                callback(error, images);
+            });
     };
 
     ImageSchema.statics.getAlbums = function(callback){

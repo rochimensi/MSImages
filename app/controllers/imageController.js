@@ -12,8 +12,8 @@ module.exports = function (server) {
         name: "ImageController"
     };
 
-    Controller.list = function(callback){
-        Image.getImages(function(error, images){
+    Controller.list = function(options, callback){
+        Image.getImages(options, function(error, images){
             if(error){
                 callback(error);
                 return;
