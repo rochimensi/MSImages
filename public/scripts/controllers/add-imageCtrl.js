@@ -5,8 +5,8 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             var tags;
             $scope.submitted = true;
             if($scope.name && $scope.file && $scope.tags) {
-               imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected, $scope.tags, $scope.file)
-                    .success(function (data, status, headers, config) {
+               imageService.create($scope.name, $scope.description, $scope.defaultContributorSelected, $scope.tags, $scope.file, $scope.defaultAlbumSelected)
+                   .success(function (data, status, headers, config) {
                           $location.path('/images');
                     })
                     .error(function (current, status, headers, config) {
@@ -27,6 +27,12 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.cancelContributor = function(){
             $scope.addContrib = false;
         };
+        $scope.addAlbumButton = function(){
+            $scope.addAlbum = true;
+        };
+        $scope.cancelAlbum = function(){
+            $scope.addAlbum = false;
+        };
 
         $scope.saveContributor = function () {
             var contributors = [];
@@ -41,6 +47,19 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
                 $scope.addContrib = false;
             }
         };
+        $scope.saveAlbum = function () {
+            var album = [];
+            $scope.submitted = true;
+            if($scope.album) {
+                $scope.defaultAlbumSelected = $scope.album;
+                imageService.getAlbums()
+                .success(function(data){
+                    data.push($scope.album);
+                    $scope.albums = data;
+                });
+                $scope.addAlbum = false;
+            }
+        };
         $scope.getFile = function () {
             $scope.progress = 0;
             fileReader.readAsDataUrl($scope.file, $scope)
@@ -52,17 +71,16 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
         $scope.init = function () {
             $scope.titleView = "Upload new image";
             $scope.addContrib = false;
+            $scope.addAlbum = false;
             $scope.size = false;
             $scope.submitted = false;
             $scope.showimageSrc = true;
             $scope.defaultContributorSelected = undefined;
+            $scope.defaultAlbumSelected = undefined;
             imageService.getContributors()
                 .success(function(data){  $scope.contributors = data } );
-            $scope.tags = [
-                { text: 'Tag1' },
-                { text: 'Tag2' },
-                { text: 'Tag3' }
-            ];
+            imageService.getAlbums()
+            .success(function(data){  $scope.albums = data } );
 
         };
 

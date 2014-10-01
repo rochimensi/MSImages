@@ -9,7 +9,10 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     this.getContributors = function(){
       return $http.get("/api/images/contributors");
     }
-
+    //Get all Albums
+    this.getAlbums = function(){
+        return $http.get("/api/images/albums");
+    }
     //Get all Tags
     this.getTags = function(){
         return $http.get("/api/images/tags");
@@ -35,16 +38,17 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
 
     //Create a new Image
-    this.create = function (imageName, imageDescription, imageContributor, imageTags, imageFile) {
+    this.create = function (imageName, imageDescription, imageContributor, imageTags, imageFile, imageAlbum) {
         var fd = new FormData();
         fd.append('name', imageName);
         fd.append('description', imageDescription);
         fd.append('contributor',imageContributor);
+        fd.append('album',imageAlbum);
+        console.log(imageAlbum);
         angular.forEach(imageTags, function(tag){
             fd.append('tags', tag.text);
         });
         fd.append('file', imageFile);
-       console.log(imageFile);
         return $http.post("/api/images", fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
@@ -52,7 +56,7 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     };
 
     // Update Image
-    this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags) {
+    this.updateImage = function (imageId, imageName, imageDescription, imageContributor, imageTags, imageAlbum) {
         var formattedTags = [];
         var tags = [];
 
@@ -63,7 +67,8 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
             name: imageName,
             contributor: imageContributor,
             description: imageDescription,
-            tags : formattedTags
+            tags : formattedTags,
+            album: imageAlbum
 
         }
         return $http.put("/api/images/"+imageId, updatedImage);

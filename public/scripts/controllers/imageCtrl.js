@@ -1,5 +1,5 @@
-app.controller('imageCtrl', ['$scope', '$location','imageService', '$window',
-    function($scope, $location, imageService, $window) {
+app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService', '$window',
+    function($scope, $location, $routeParams,imageService, $window) {
 
         $scope.init = function () {
             $scope.titleView = "Recently Uploaded Images";
@@ -15,6 +15,8 @@ app.controller('imageCtrl', ['$scope', '$location','imageService', '$window',
             .success(function(data){  $scope.contributors = data } );
             imageService.getShapes()
                 .success(function(data){  $scope.shapes = data.shape } );
+            $scope.id = $routeParams.imageId;
+            $scope.defaultAlbumSelected = $scope.album;
         };
 
         $scope.getFormattedTags = function(tags) {

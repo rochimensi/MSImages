@@ -4,7 +4,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             $scope.save = function () {
                 $scope.submitted = true;
                 if($scope.name) {
-                    imageService.updateImage($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags)
+                    imageService.updateImage($scope.id, $scope.name, $scope.description, $scope.defaultContributorSelected,$scope.tags, $scope.defaultAlbumSelected)
                         .success(function (data, status, headers, config) {
                            // $scope.submitted = false;
                             $location.path('/images');
@@ -14,7 +14,19 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                         });
                 }
             };
-
+            $scope.saveAlbum = function () {
+                var album = [];
+                $scope.submitted = true;
+                if($scope.album) {
+                    $scope.defaultAlbumSelected = $scope.album;
+                    imageService.getAlbums()
+                    .success(function(data){
+                        data.push($scope.album);
+                        $scope.albums = data;
+                    });
+                    $scope.addAlbum = false;
+                }
+            };
             $scope.getFile = function () {
                 $scope.progress = 0;
                 fileReader.readAsDataUrl($scope.file, $scope)
@@ -32,6 +44,12 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
             };
             $scope.cancelContributor = function(){
                 $scope.addContrib = false;
+            };
+            $scope.addAlbumButton = function(){
+                $scope.addAlbum = true;
+            };
+            $scope.cancelAlbum = function(){
+                $scope.addAlbum = false;
             };
 
             // Save new contributor
@@ -52,6 +70,7 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                 $scope.titleView = "EDIT Image";
                 $scope.sidebar = 'false';
                 $scope.size = 'true';
+                $scope.addAlbum = false;
                 imageService.getByImageId($routeParams.imageId)
                     .success(function(data){  $scope.current = data;
                         $scope.name = $scope.current.name;
@@ -61,6 +80,9 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                         imageService.getContributors()
                             .success(function(data){  $scope.contributors = data } );
                         $scope.tags = $scope.current.tags;
+                        $scope.defaultAlbumSelected = $scope.current.album;
+                        imageService.getAlbums()
+                        .success(function(data){  $scope.albums = data;} );
                         $scope.showimageSrc = false;
                         $scope.id = $routeParams.imageId;} );
 
