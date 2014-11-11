@@ -85,4 +85,9 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         return $http.get("api/images/download/"+id);
     }
 
+    //Pagination
+    this.pagination = function(){
+        return $http.get("api/images/download/"+id);
+    }
+
 }]);
