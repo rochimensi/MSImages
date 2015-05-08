@@ -19,7 +19,7 @@ module.exports = function (server) {
         var tmp_path = file.path;
         var serverPath = uploadDir + name + '.' + getExtension(file.name);
 
-        fs.rename(tmp_path, serverPath, function(error){
+        fs.move(tmp_path, serverPath, function(error){
             if(error) {
                 callback(error);
                 return;

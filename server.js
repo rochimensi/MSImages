@@ -3,7 +3,7 @@ var server = module.exports = express();
 server.globals = {};
 
 var db = require('./config/db');
-var fs = require('fs');
+var fs = require('fs-extra');
 var http = require('http');
 var path = require('path');
 var log = require(path.join(__dirname, './app/utils/logger'))();
@@ -15,7 +15,7 @@ server.globals.path = path;
 server.globals.q = q;
 
 server.use(express.bodyParser({keepExtensions:true}));
-server.set('uploadDir', __dirname + '/public/uploads/');
+server.set('uploadDir', path.join(__dirname, '/public/uploads/'));
 
 server.globals.fileIO = require(path.join(__dirname, './app/utils/fileIO'))(server);
 require(path.join(__dirname, '/app/models'))(server);
