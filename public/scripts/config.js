@@ -7,10 +7,6 @@ var app = angular.module('app', ['ngRoute','ngTagsInput','ui.bootstrap']);
 app.config(function($routeProvider) {
 
     $routeProvider
-        .when('/', {
-            templateUrl	: '../partials/home.html',
-            controller 	: 'mainCtrl'
-        })
         .when('/image-upload', {
             templateUrl	: '../partials/image-upload.html',
             controller 	: 'add-imageCtrl'
@@ -44,7 +40,7 @@ app.config(function($routeProvider) {
             controller 	: 'imageCtrl'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/images'
         });
 });
 

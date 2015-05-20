@@ -1,29 +1,26 @@
 app.controller('paginationCtrl',['$scope', 'imageService',
     function ($scope, imageService) {
 
-        $scope.filteredTodos = [],
         $scope.currentPage = 1,
+        $scope.itemsperpage = 2;
 
-        $scope.maxSize = 5;
 
+        $scope.init = function () {
+           imageService.getAllImages(0, $scope.itemsperpage)
+            .success(function(data) {
+               $scope.totalItems = data.length;
+            })
+        };
+
+        $scope.pageChanged = function (currentPage){
+          var start = (currentPage - 1 )  + $scope.itemsperpage;
+          var end = start + $scope.itemsperpage;
+            imageService.getAllImages(start, end)
+            .success(function(data) {
+                $scope.images = data;
+            })
+        };
         //Initialization
         $scope.init();
 
-        $scope.init = function () {
-           imageService.pagination()
-            .success(function(data) {
-               $scope.numPerPage = data;
-                $scope.name = $scope.current.name;
-            })
-        };
-        $scope.numPages = function () {
-            return Math.ceil($scope.todos.length / $scope.numPerPage);
-        };
-
-        $scope.$watch('currentPage + numPerPage', function() {
-            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-            , end = begin + $scope.numPerPage;
-
-            $scope.filteredTodos = $scope.todos;
-        });
     }]);

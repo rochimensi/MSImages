@@ -72,9 +72,13 @@ app.controller('edit-imageCtrl', ['$scope','$location','$routeParams','imageServ
                 $scope.size = 'true';
                 $scope.addAlbum = false;
                 imageService.getByImageId($routeParams.imageId)
-                    .success(function(data){  $scope.current = data;
+                    .success(function(data){
+                        $scope.current = data;
                         $scope.name = $scope.current.name;
-                        $scope.description = $scope.current.description;
+                        if ($scope.current.description.isUndefined)
+                            $scope.description = "Description";
+                        else
+                            $scope.description = $scope.current.description;
                         $scope.size = $scope.current.size;
                         $scope.defaultContributorSelected = $scope.current.contributor;
                         imageService.getContributors()
