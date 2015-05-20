@@ -23,7 +23,7 @@
                           </p>
                     </div>
                 </div>
-            <div class="row">
+            <div class="row" ng-controller="paginationCtrl">
                 <div class="col-md-3" ng-repeat="image in images">
                     <div class="images-container">
                         <div> <a href="#/detailed-image/{{image._id}}" class="search-preview thumbnail"><img ng-src={{image.path}}></a> </div>
@@ -33,11 +33,11 @@
 
                     </div>
                 </div>
+                <div class="row">
+                    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+                </div>
             </div>
-            <div class="row" ng-controller="paginationCtrl">
-                <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
-            </div>
          </div>
     </div>
 </div>
