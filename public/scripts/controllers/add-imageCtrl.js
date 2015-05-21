@@ -73,6 +73,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             $scope.addContrib = false;
             $scope.addAlbum = false;
             $scope.size = false;
+            $scope.tags = "";
             $scope.submitted = false;
             $scope.showimageSrc = true;
             $scope.defaultContributorSelected = undefined;

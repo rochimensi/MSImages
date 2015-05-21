@@ -3,7 +3,8 @@ app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService'
 
         $scope.init = function () {
             $scope.titleView = "Recently Uploaded Images";
-            imageService.getImages()
+            //currentPage
+            imageService.getImagesPerPage(10,1)
                 .success(function(data){
                   $scope.images = data;
                  }

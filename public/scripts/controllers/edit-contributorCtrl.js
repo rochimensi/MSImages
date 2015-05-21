@@ -4,7 +4,8 @@ app.controller('edit-contributorCtrl',['$scope','$location','$routeParams','imag
         $scope.titleView = "Edit Contributor";
         $scope.current = imageService.getContributorById($routeParams.imageId);
         $scope.name = 'Celeste';//$scope.current.name;
-        $scope.description = 'Descripcion'; $scope.current.description;
+        $scope.description = 'Descripcion';
+        //$scope.current.description;
 
         $scope.save = function () {
             $scope.submitted = true;

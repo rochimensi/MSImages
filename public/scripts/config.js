@@ -1,16 +1,12 @@
 //Controllers
 
 // Creación del módulo que engloba todos los controllers
-var app = angular.module('app', ['ngRoute','ngTagsInput']);
+var app = angular.module('app', ['ngRoute','ngTagsInput','ui.bootstrap']);
 
 // Configuración de las rutas
 app.config(function($routeProvider) {
 
     $routeProvider
-        .when('/', {
-            templateUrl	: '../partials/home.html',
-            controller 	: 'mainCtrl'
-        })
         .when('/image-upload', {
             templateUrl	: '../partials/image-upload.html',
             controller 	: 'add-imageCtrl'
@@ -44,7 +40,7 @@ app.config(function($routeProvider) {
             controller 	: 'imageCtrl'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/images'
         });
 });
 

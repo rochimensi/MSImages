@@ -4,18 +4,38 @@
     margin-right: auto;
     margin-left: 0;
 }
+.container-about {
+    max-width: 900px;
+    font-family: "Muli",Verdana !important;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    box-sizing: border-box;
+    display: block;
+    height: 494px;
+    margin-left: 206.5px;
+    margin-right: 206.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .images-container{
     height: 300px;
+    padding-top: 30px;
 }
 .download-button{
     background-color: #33B84E;
     border-color: #33B84E;
     color: #cc3318;
 }
+
+.borderBox{
+    background-color: #33B84E;
+}
 .title-image {
     border-bottom-style: solid;
     border-bottom-color: #a8b7c5;
     border-width: 2px;
+    padding-top: 15px;
 }
 .image-preview, .default-image{
     max-width: 100%;
@@ -29,7 +49,7 @@
 }
 .search-preview{
     max-width: 50%;
-    max-height: 50%;
+    max-height: 60%;
     height: 150px;
     width: 50%;
 }
@@ -61,13 +81,24 @@
     width: 60%;
     padding: 1%;
 }
+.image-upload{
+    height: 34px;
+    border-radius: 4px;
+    margin: 1% 0% 0% 2%;
+    padding: 1%;
+}
 .image-container{
     background: #eee;
     border: 1px dashed black;
     border-radius: 4px;
     float: left;
-    width: 80%;
-    max-width: 30%;
+    width: 60%;
+    margin-top: 1.5%;
+}
+.box-upload{
+    border-radius: 4px;
+    float: left;
+    width: 60%;
     margin-top: 1.5%;
 }
 .fileUpload {
