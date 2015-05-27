@@ -86,12 +86,12 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
     }
 
     //Get All Images
-    this.getAllImages = function(start, end){
-        return $http.get("/api/images?itemsPerPage=20&sortBy=uploadedOn");
+    this.getAllImages = function(){
+        return $http.get("/api/images/");
     }
     //Pagination and Sorting
-    this.getImagesPerPage = function(start, pageNumber){
-        return $http.get("/api/images?itemsPerPage="+start+"&pageNumber=1&sortBy=uploadedOn");
+    this.getImagesPerPage = function(itemsPerPage, pageNumber){
+        return $http.get("/api/images?itemsPerPage="+itemsPerPage+"&pageNumber="+pageNumber+"&sortBy=uploadedOn");
     }
 
 }]);

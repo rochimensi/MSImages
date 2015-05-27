@@ -2,7 +2,7 @@ app.controller('paginationCtrl',['$scope', 'imageService',
     function ($scope, imageService) {
 
         $scope.currentPage = 1,
-        $scope.itemsperpage = 2;
+        $scope.itemsPerPage = 12;
 
 
         $scope.init = function () {
@@ -12,11 +12,10 @@ app.controller('paginationCtrl',['$scope', 'imageService',
             })
         };
 
-        $scope.pageChanged = function (currentPage){
-          var start = (currentPage - 1 )  + $scope.itemsperpage;
-          var end = start + $scope.itemsperpage;
-            imageService.getAllImages(start, end)
+        $scope.pageChanged = function (){
+             imageService.getImagesPerPage($scope.itemsPerPage, $scope.currentPage)
             .success(function(data) {
+                $scope.images = [];
                 $scope.images = data;
             })
         };

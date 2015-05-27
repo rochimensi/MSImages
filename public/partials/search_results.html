@@ -6,7 +6,7 @@
                 <h3 class="ng-binding">{{titleView}}</h3>
             </div>
             <div class="row">
-                <div class="col-md-3" ng-repeat="image in images">
+                <div class="col-md-3" ng-repeat="image in images" ng-controller="paginationCtrl">
                     <div class="images-container">
                         <div> <a href="#/detailed-image/{{image._id}}" class="search-preview thumbnail"><img ng-src={{image.path}}></a> </div>
                         <div class="col-md-2"> <a href="#/edit-image/{{image._id}}"><span class="glyphicon glyphicon-edit"></span></a> </div>
@@ -18,7 +18,7 @@
 
             </div>
             <div>
-              <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+              <pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"></pagination>
             </div>
         </div>
     </div>
