@@ -1,10 +1,18 @@
 app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService', '$window',
     function($scope, $location, $routeParams,imageService, $window) {
 
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 12;
+        $scope.totalItems = 0;
+
         $scope.init = function () {
             $scope.titleView = "Recently Uploaded Images";
             //currentPage
-            imageService.getImagesPerPage(10,1)
+            imageService.getAllImages()
+            .success(function(data) {
+                $scope.totalItems = data.length;
+            })
+            imageService.getImagesPerPage($scope.itemsPerPage, $scope.currentPage)
                 .success(function(data){
                   $scope.images = data;
                  }
@@ -53,6 +61,15 @@ app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService'
                       error(function(data, status, headers, config) {
                       });
 
+        };
+
+        //Pagination - The #Page has changed
+        $scope.pageChanged = function (){
+            imageService.getImagesPerPage($scope.itemsPerPage, $scope.currentPage)
+            .success(function(data) {
+                $scope.images = [];
+                $scope.images = data;
+            })
         };
 
         //Init data
