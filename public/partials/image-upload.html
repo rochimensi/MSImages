@@ -28,18 +28,17 @@
                  </div>
 
                 <div class="col-md-6">
-                    <div>
+
                     <label>Name: </label>
                     <input type="text" class="form-control" name="name" ng-model="name" placeholder="Name" maxlength="50" required>
                     <span class="error" ng-show="">Required!</span>
-                    </div>
+
                     <label>Description: </label>
                     <textarea type="text" class="form-control" name="description" ng-model="description" placeholder="Description" maxlength="500"></textarea>
+
                     <!-- Tags-->
-                    <div>
-                        <label>Tags: </label>
-                        <tags-input name="tags" ng-model="tags"></tags-input>
-                    </div>
+                    <label>Tags: </label>
+                    <tags-input name="tags" ng-model="tags"></tags-input>
 
                     <div class="image-middleContainer" ng-show="size">
                         <label>Size: </label> {{size | bytes}}
@@ -48,49 +47,19 @@
                     <div class="row">
                         <div class="col-md-9 image-middleContainerContributor">
                             <label>Contributor:</label>
-                            <select type="text" class="form-control" name="defaultContributorSelected" ng-model="defaultContributorSelected" ng-options="contributor for contributor in contributors">
-                                <option value="">Choose a contributor</option></select>
+                            <input type="text" ng-model="contributorSelected" placeholder="Start typing.." typeahead="contributor for contributor in contributors | filter:$viewValue | limitTo:8" class="form-control">
 
                         </div>
-                        <div class="col-md-1 add">
-                            <button ng-click="addContributor()" class="btn btn-primary"> Add</button>
-                        </div>
-                        <div ng-show="addContrib">
-                            <div class="col-md-3 image-middleContainerContributor">
-                                <label>New Contributor:</label>
-                                <input type="text" class="form-control" float= "left" name="nameContributor" ng-model="nameContributor" placeholder="Contributor Name" maxlength="50">
-                            </div>
-                            <div class="col-md-4 add">
-                                <button ng-click="saveContributor()" class=" btn-primary"> Save</button>
-                                <button ng-click="cancelContributor()" class=" btn-primary"> Cancel</button>
-                            </div>
-                        </div>
+
                     </div>
                     <!-- Albums -->
                     <div class="row">
                         <div class="col-md-6 image-middleContainerContributor">
                             <label>Album:</label>
-                            <select type="text" class="form-control" name="defaultAlbumSelected" ng-model="defaultAlbumSelected" ng-options="album for album in albums">
-                                <option value="">Choose a album</option></select>
+                            <input type="text" ng-model="albumSelected"  placeholder="Start typing.." typeahead="album for album in albums | filter:$viewValue | limitTo:8" class="form-control">
+                        </div>
 
-                        </div>
-                        <div class="col-md-1 add">
-                            <button ng-click="addAlbumButton()" class="btn btn-primary"> Add</button>
-                        </div>
-                        <div ng-show="addAlbum">
-                            <div class="col-md-3 image-middleContainerContributor">
-                                <label>New Album:</label>
-                                <input type="text" class="form-control" float= "left" name="album" ng-model="album" placeholder="Album Name" maxlength="50">
-                            </div>
-                            <div class="col-md-4 add">
-                                <button ng-click="saveAlbum()" class="btn-primary"> Save</button>
-                                <button ng-click="cancelAlbum()" class="btn-primary"> Cancel</button>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                </div>
-
 
                     <div class="footer-image">
                         <button type="submit" ng-click="save()" class="action-form footer-button">Save</button>
