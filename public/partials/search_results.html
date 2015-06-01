@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2" ng-include="'partials/sidebar.html'" ng-show='sidebar'></div>
-        <div class="col-md-10" ng-controller="paginationCtrl">
+        <div class="col-md-10">
             <div class="title-image main-body">
                 <h3 class="ng-binding">{{titleView}}</h3>
             </div>
@@ -18,7 +18,7 @@
 
             </div>
             <div>
-              <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+              <pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"></pagination>
             </div>
         </div>
     </div>

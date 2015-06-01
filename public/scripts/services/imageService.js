@@ -85,13 +85,15 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         return $http.get("/api/images/download/"+id);
     }
 
-    //Get All Images
-    this.getAllImages = function(start, end){
-        return $http.get("/api/images?itemsPerPage=20&sortBy=uploadedOn");
-    }
-    //Pagination and Sorting
-    this.getImagesPerPage = function(start, pageNumber){
-        return $http.get("/api/images?itemsPerPage="+start+"&pageNumber=1&sortBy=uploadedOn");
+    //Get All Images with optional parameters - Pagination and Sorting
+    this.getAllImages = function(pageNumber, itemsPerPage){
+
+        var parameters = "";
+        if ( !(typeof pageNumber == 'undefined')) {
+            parameters = "itemsPerPage="+itemsPerPage+"&pageNumber="+pageNumber+"&";
+        }
+
+        return $http.get("/api/images?"+parameters+"sortBy=uploadedOn");
     }
 
 }]);
