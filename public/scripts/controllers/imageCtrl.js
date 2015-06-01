@@ -12,7 +12,7 @@ app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService'
             .success(function(data) {
                 $scope.totalItems = data.length;
             })
-            imageService.getImagesPerPage($scope.itemsPerPage, $scope.currentPage)
+            imageService.getAllImages($scope.currentPage, $scope.itemsPerPage)
                 .success(function(data){
                   $scope.images = data;
                  }
@@ -65,9 +65,8 @@ app.controller('imageCtrl', ['$scope', '$location','$routeParams','imageService'
 
         //Pagination - The #Page has changed
         $scope.pageChanged = function (){
-            imageService.getImagesPerPage($scope.itemsPerPage, $scope.currentPage)
+            imageService.getAllImages($scope.currentPage, $scope.itemsPerPage)
             .success(function(data) {
-                $scope.images = [];
                 $scope.images = data;
             })
         };
