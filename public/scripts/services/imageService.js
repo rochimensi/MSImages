@@ -90,10 +90,10 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
 
         var parameters = "";
         if ( !(typeof pageNumber == 'undefined')) {
-            parameters = "itemsPerPage="+itemsPerPage+"&pageNumber="+pageNumber;
+            parameters = "itemsPerPage="+itemsPerPage+"&pageNumber="+pageNumber+"&";
         }
 
-        return $http.get("/api/images?"+parameters+"&sortBy=uploadedOn");
+        return $http.get("/api/images?"+parameters+"sortBy=uploadedOn");
     }
 
 }]);
