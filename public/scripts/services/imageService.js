@@ -44,7 +44,6 @@ app.service('imageService', ['$http','$q', function ($http, $q) {
         fd.append('description', imageDescription);
         fd.append('contributor',imageContributor);
         fd.append('album',imageAlbum);
-        console.log(imageAlbum);
         angular.forEach(imageTags, function(tag){
             fd.append('tags', tag.text);
         });
