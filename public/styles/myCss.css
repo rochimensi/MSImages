@@ -53,6 +53,13 @@
     height: 150px;
     width: 50%;
 }
+.error {
+    padding: 0px 0px 0px 0px !important;
+    margin-bottom: 10px !important;
+    font-size: 1em;
+    color: #cc3318;
+
+}
 .image-browse-image-container{
     float: left;
     width: 65%;
