@@ -62,6 +62,7 @@ module.exports = function() {
     };
 
     ImageSchema.statics.getImages = function(options, callback) {
+        var self = this;
         var sort = {};
         if(options.sortBy) {
             sort[options.sortBy] = options.sortDir === 'desc' ? -1 : 1;
@@ -75,7 +76,11 @@ module.exports = function() {
             .limit(options.itemsPerPage)
             .sort(sort)
             .exec(function(error, images){
-                callback(error, images);
+              if(!error) {
+                  self.count(function (err, count) {
+                      callback(error, images, count);
+                  })
+              } else callback(error);
             });
     };
 

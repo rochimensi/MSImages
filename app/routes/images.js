@@ -11,7 +11,10 @@ module.exports = function (server) {
     Controller.list = function(req, res){
         var imageController_list = q.denodeify(ImageController.list);
         imageController_list(req.query)
-            .then(function(data) {res.send(200, data)}, function(error) {res.send(error)});
+            .then(function(data) {
+              res.setHeader('X-Total-Count', data.count);
+              res.send(200, data.results);
+          }, function(error) {res.send(error)});
     };
 
     Controller.read = function(req, res){
