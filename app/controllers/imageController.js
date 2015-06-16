@@ -13,11 +13,11 @@ module.exports = function (server) {
     };
 
     Controller.list = function(options, callback){
-        Image.getImages(options, function(error, images){
+        Image.getImages(options, function(error, images, count){
             if(error){
                 callback(error);
                 return;
-            } else callback(error, images);
+            } else callback(error, { results: images, count: count });
         });
     };
 
