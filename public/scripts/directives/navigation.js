@@ -1,8 +1,9 @@
 app.directive('navigation', function() {
     return {
             restrict: 'E',
-        //items adentro de la directiva
-        //afuera de la directiva lo llamos igual por usar =
+        // If we want to use items inside the directive
+        // we use items
+        // out to the directive use =itemMenu or "=" to use the same name
            scope: {
                 items: '=itemMenu'
             },
