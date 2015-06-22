@@ -16,13 +16,14 @@
                                     <img class="image-preview" ng-src="{{imageSrc}}" ng-hide="!imageSrc"/>
                                 </div>
                                 <div class="box-upload">
-                                    <input id="uploadFile" name="uploadFile" class="image-upload" placeholder="Choose File" disabled="disabled" value="{{imageName}}" required/>
+                                    <input id="uploadFile" name="uploadFile" class="image-upload" placeholder="Choose File" disabled="disabled" value="{{imageName}}" required>
                                     <div class="fileUpload btn btn-mob btn-primary">
                                         <span>Upload</span>
                                         <input type="file" file-input="files" id="imageType" name="imageSelected" accept="image/png, image/jpeg" multiple ng-file-select="onFileSelect($file)"  class="upload">
-                                        <span class="error" ng-show="imageForm.uploadFile.$error.required && submitted">Required!</span>
-                                    </div>
+                                     </div>
+                                    <p ng-show="!imageSelected && submitted" class="error"> Required!</p>
                                 </div>
+
                             </div>
                  </div>
                 <div class="col-md-6">
@@ -36,7 +37,7 @@
                     <!-- Tags-->
                     <label>Tags: </label>
                     <tags-input name="tags" ng-model="tags" required></tags-input>
-                    <p ng-show="imageForm.tags.$error.required && submitted" class="error">Required!</p>
+                    <p ng-show="!tags.length && submitted" class="error">Required!</p>
 
                     <div class="image-middleContainer" ng-show="size">
                         <label>Size: </label> {{size | bytes}}
