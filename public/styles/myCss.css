@@ -18,6 +18,9 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.selected {
+    background-color: lightgreen !important;
+}
 .images-container{
     height: 300px;
     padding-top: 30px;

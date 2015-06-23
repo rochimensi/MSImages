@@ -1,7 +1,13 @@
-app.controller('navCtrl',['$scope',function($scope){
+app.controller('navCtrl',['$scope','$location', function($scope, $location){
+
     $scope.items =[
-        {"menu":"Upload Image", "link":"#/image-upload"},
-        {"menu":"Images", "link":"#/images"},
-        {"menu":"About","link":"#/about"}
+        {"menu":"Upload Image", "path":"#/image-upload"},
+        {"menu":"Images", "path":"#/images"},
+        {"menu":"About","path":"#/about"}
     ];
+    $scope.selectedRow = null;  // initialize our variable to null
+    $scope.setClickedRow = function(index){  //function that sets the value of selectedRow to current index
+        $scope.selectedRow = index;
+    }
+
 }]);
