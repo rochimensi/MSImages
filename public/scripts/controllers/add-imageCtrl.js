@@ -25,7 +25,7 @@ app.controller('add-imageCtrl',['$scope','$location','imageService','fileReader'
             fileReader.readAsDataUrl($scope.file, $scope)
                 .then(function(result) {
                     $scope.imageSrc = result;
-                    $scope.imageName = file.name;
+                    $scope.imageName = $scope.file.name;
                 });
         };
 
