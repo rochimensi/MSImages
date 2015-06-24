@@ -20,11 +20,12 @@
     <script type="text/javascript" src="scripts/controllers/detailed-imageCtrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/imageCtrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/add-contributorCtrl.js"></script>
-
+    <script type="text/javascript" src="scripts/controllers/navCtrl.js"></script>
 
     <!-- Directives -->
     <script type="text/javascript" src="scripts/directives/fileInput.js"></script>
     <script type="text/javascript" src="scripts/directives/ngFileSelect.js"></script>
+    <script type="text/javascript" src="scripts/directives/navigation.js"></script>
     <!-- Filters -->
     <script type="text/javascript" src="scripts/filters/showSize.js"></script>
     <!-- Factory -->
@@ -40,10 +41,11 @@
     <link rel="stylesheet" href="styles/ng-tags-input.min.css">
 
 </head>
-<body ng-controller='imageCtrl'>
+<body>
 <!-- Navigation bar -->
-
-<header ng-include="'partials/nav.html'"></header>
+<header>
+    <navigation item-Menu="menu"></navigation>
+</header>
 <!-- Navigation bar -->
 <div ng-view></div>
 <!--<footer ng-include="'partials/footer.html'"></footer>

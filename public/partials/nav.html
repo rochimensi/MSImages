@@ -13,13 +13,11 @@
         </div>
      </div>
 </div>
-<nav class="navbar navbar-default " role="navigation">
+<nav class="navbar navbar-default " role="navigation" ng-controller="navCtrl">
         <div class="container-home">
-            <div class="navbar-collapse collapse">
+            <div ng-repeat="item in items">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/image-upload">Upload</a></li>
-                    <li class="active"><a href="#/images">Images</a></li>
-                    <li><a href="#/about">About</a></li>
+                    <li><a href="{{item.path}}" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)">{{item.menu}}</a></li>
                 </ul>
             </div>
         </div>
